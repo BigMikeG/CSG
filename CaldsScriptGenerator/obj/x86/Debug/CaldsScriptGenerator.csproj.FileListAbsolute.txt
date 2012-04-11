@@ -1,0 +1,9 @@
+C:\Users\gzndq9\Documents\SharpDevelop Projects\CaldsScriptGenerator\CaldsScriptGenerator\bin\Debug\CaldsScriptGenerator.exe
+C:\Users\gzndq9\Documents\SharpDevelop Projects\CaldsScriptGenerator\CaldsScriptGenerator\bin\Debug\CaldsScriptGenerator.pdb
+C:\Users\gzndq9\Documents\SharpDevelop Projects\CaldsScriptGenerator\CaldsScriptGenerator\obj\x86\Debug\ResolveAssemblyReference.cache
+C:\Users\gzndq9\Documents\SharpDevelop Projects\CaldsScriptGenerator\CaldsScriptGenerator\obj\x86\Debug\CaldsScriptGenerator.AboutBox.resources
+C:\Users\gzndq9\Documents\SharpDevelop Projects\CaldsScriptGenerator\CaldsScriptGenerator\obj\x86\Debug\GenerateResource.read.1.tlog
+C:\Users\gzndq9\Documents\SharpDevelop Projects\CaldsScriptGenerator\CaldsScriptGenerator\obj\x86\Debug\GenerateResource.write.1.tlog
+C:\Users\gzndq9\Documents\SharpDevelop Projects\CaldsScriptGenerator\CaldsScriptGenerator\obj\x86\Debug\CaldsScriptGenerator.exe
+C:\Users\gzndq9\Documents\SharpDevelop Projects\CaldsScriptGenerator\CaldsScriptGenerator\obj\x86\Debug\CaldsScriptGenerator.pdb
+C:\Users\gzndq9\Documents\SharpDevelop Projects\CaldsScriptGenerator\CaldsScriptGenerator\obj\x86\Debug\CaldsScriptGenerator.MainForm.resources

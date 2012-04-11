@@ -1,0 +1,18 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+# SharpDevelop 4.1.0.8000
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CaldsScriptGenerator", "CaldsScriptGenerator\CaldsScriptGenerator.csproj", "{1AFB1073-5F2B-4E9C-B758-DDA204246969}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x86 = Debug|x86
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{1AFB1073-5F2B-4E9C-B758-DDA204246969}.Debug|x86.Build.0 = Debug|x86
+		{1AFB1073-5F2B-4E9C-B758-DDA204246969}.Debug|x86.ActiveCfg = Debug|x86
+		{1AFB1073-5F2B-4E9C-B758-DDA204246969}.Release|x86.Build.0 = Release|x86
+		{1AFB1073-5F2B-4E9C-B758-DDA204246969}.Release|x86.ActiveCfg = Release|x86
+	EndGlobalSection
+EndGlobal
