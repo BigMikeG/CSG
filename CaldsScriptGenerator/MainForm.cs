@@ -361,8 +361,18 @@ namespace CaldsScriptGenerator
         {
             if (checkincopyCheckBox.Checked)
             {
-                string devRel = (devRelCheckBox.Checked) ? " Development_Release" : "";
-                string ppvRel = (ppvRelCheckBox.Checked) ? " PPV_Release" : "";
+                string rel = "";
+                
+                // Set the release string based on the release radio buttons.
+                if (valRelRadioButton.Checked) {
+                    rel = " Validation_Release";
+                }
+                else if (ppvRelRadioButton.Checked) {
+                    rel = " PPV_Release";
+                }
+                else {
+                    rel = " Development_Release";
+                }
             	
                 if (revNameTextBox.Text == "")
                 {
@@ -373,7 +383,7 @@ namespace CaldsScriptGenerator
                     foreach (string part in parts)
                 	{
                         tw.WriteLine("Checkin_Copy copy=" + part + " logmessage=" + logMessageTextBox.Text +
-                                      " revname=" + revNameTextBox.Text + devRel + ppvRel);
+                                      " revname=" + revNameTextBox.Text + rel);
                 	}
                 }
             }
