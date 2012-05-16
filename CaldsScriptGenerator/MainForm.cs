@@ -363,6 +363,10 @@ namespace CaldsScriptGenerator
             {
                 string rel = "";
                 
+                // Remove any spaces from the log message and rev name strings.
+                string logMsg  = logMessageTextBox.Text.Replace(" ", "");
+                string revName = revNameTextBox.Text.Replace(" ", "");
+                
                 // Set the release string based on the release radio buttons.
                 if (valRelRadioButton.Checked) {
                     rel = " Validation_Release";
@@ -382,8 +386,8 @@ namespace CaldsScriptGenerator
                 {
                     foreach (string part in parts)
                 	{
-                        tw.WriteLine("Checkin_Copy copy=" + part + " logmessage=" + logMessageTextBox.Text +
-                                      " revname=" + revNameTextBox.Text + rel);
+                        tw.WriteLine("Checkin_Copy copy=" + part + " logmessage=" + logMsg +
+                                      " revname=" + revName + rel);
                 	}
                 }
             }

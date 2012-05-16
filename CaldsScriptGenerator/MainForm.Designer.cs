@@ -510,7 +510,7 @@ namespace CaldsScriptGenerator
                                     this.helpToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(969, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(992, 24);
             this.menuStrip1.TabIndex = 33;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -544,7 +544,7 @@ namespace CaldsScriptGenerator
                                     this.toolStripStatusLabel1});
             this.statusStrip1.Location = new System.Drawing.Point(0, 671);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(969, 22);
+            this.statusStrip1.Size = new System.Drawing.Size(992, 22);
             this.statusStrip1.TabIndex = 34;
             this.statusStrip1.Text = "statusStrip1";
             // 
@@ -693,7 +693,8 @@ namespace CaldsScriptGenerator
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(969, 693);
+            this.AutoScroll = true;
+            this.ClientSize = new System.Drawing.Size(992, 693);
             this.Controls.Add(this.valRelRadioButton);
             this.Controls.Add(this.ppvRelRadioButton);
             this.Controls.Add(this.devRelRadioButton);
@@ -732,7 +733,6 @@ namespace CaldsScriptGenerator
             this.Controls.Add(this.activateCheckBox);
             this.Controls.Add(this.chcalcopyCheckBox);
             this.Controls.Add(this.menuStrip1);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "MainForm";
