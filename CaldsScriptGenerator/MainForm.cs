@@ -1,12 +1,14 @@
 ﻿/*
  * Created by SharpDevelop.
- * User: GZNDQ9
+ * Author: Mike Galiati 
  * Date: 3/2/2012
  * Time: 4:32 PM
  * 
  * To change this template use Tools | Options | Coding | Edit Standard Headers.
  * 
- * Move Batch Cal Edit after Upload.
+ * - Changed script file output to Unix line endings (no carriage return just linefeed).
+ * - Trimmed leading and trailing whitespace from all of the parts and cal data 
+ *   before appending to command strings.
  */
 using System;
 using System.Collections.Generic;
@@ -44,10 +46,6 @@ namespace CaldsScriptGenerator
             // The InitializeComponent() call is required for Windows Forms designer support.
             //
             InitializeComponent();
-            
-            //
-            // TODO: Add constructor code after the InitializeComponent() call.
-            //
         }
        
         /// <summary>
@@ -61,36 +59,45 @@ namespace CaldsScriptGenerator
         	List<string> partsDst = new List<string>(); // Declare new destination parts List.
                 
             // Verify that the output path exists.
-            if (!Directory.Exists(outputFolderTextBox.Text)) {
+            if (!Directory.Exists(outputFolderTextBox.Text)) 
+            {
                 UpdateStatusBar("Output folder Does Not Exist! Please enter a valid output folder.");
                 return;
             }
         	
             // If the source parts list is needed, verify that it exists.
-            if (isPartsListSrcRequired() && (partNumSrcTextBox.Text.Length == 0)) {
+            if (isPartsListSrcRequired() && (partNumSrcTextBox.Text.Length == 0)) 
+            {
                 UpdateStatusBar("Enter at least 1 source part, please.");
                 return;
             }
-            else {
+            else 
+            {
             	// Read the lines from the source parts textbox.
-            	foreach (string part in partNumSrcTextBox.Lines) {
+            	foreach (string part in partNumSrcTextBox.Lines) 
+            	{
             	    // If the part isn't blank add it to the list.
-            	    if (part != "") {
+            	    if (part != "") 
+            	    {
             	        partsSrc.Add(part); // add the part to our List
                     }
             	}
             }
         	
             // If the destination parts list is needed, verify that it exists.
-            if (isPartsListDestRequired() && (partNumDestTextBox.Text.Length == 0)) {
+            if (isPartsListDestRequired() && (partNumDestTextBox.Text.Length == 0)) 
+            {
                 UpdateStatusBar("Enter at least 1 destination part, please.");
                 return;
             }
-            else {
+            else 
+            {
             	// Read the lines from the destination parts textbox.
-            	foreach (string part in partNumDestTextBox.Lines) {
+            	foreach (string part in partNumDestTextBox.Lines) 
+            	{
             	    // If the part isn't blank add it to the list.
-            	    if (part != "") {
+            	    if (part != "") 
+            	    {
             	        partsDst.Add(part); // add the part to our List
                     }
             	}
@@ -98,6 +105,9 @@ namespace CaldsScriptGenerator
             
             // Create a writer and open the file (using @ because it ignores escape sequences (such as "\")).
             TextWriter tw = new StreamWriter(outputFolderTextBox.Text + "\\" + ProcessScriptFile);
+        	
+            // Set new line character to Unix style because Filezilla won't convert the new line using SFTP.
+            tw.NewLine = "\n";
         	
             waDefault(tw);
             mkHandle(tw);
@@ -171,7 +181,7 @@ namespace CaldsScriptGenerator
         	// Is the Work Area Default checkbox checked?
         	if (waDefaultCheckBox.Checked)
         	{
-                tw.WriteLine("wadefault swpart=" + waDefSwPartTextBox.Text + " libname=" + waDefLibTextBox.Text);
+        	    tw.WriteLine("wadefault swpart=" + waDefSwPartTextBox.Text.Trim() + " libname=" + waDefLibTextBox.Text.Trim());
             }
         }
         
@@ -180,7 +190,7 @@ namespace CaldsScriptGenerator
         	// Is the Work Area Default checkbox checked?
         	if (mkHandleCheckBox.Checked)
         	{
-                tw.WriteLine("Mkhandle member=" + mkHandleSwPartTextBox.Text);
+        	    tw.WriteLine("Mkhandle member=" + mkHandleSwPartTextBox.Text.Trim());
             }
         }
         
@@ -192,7 +202,7 @@ namespace CaldsScriptGenerator
                 string intended = (intendedCheckBox.Checked) ? "y" : "n";
             	foreach (string part in parts)
             	{
-                    tw.WriteLine("Activate_Part member=" + part + " Intended_for_Vehicle_Assembly_Plant_use=" + intended);
+            	    tw.WriteLine("Activate_Part member=" + part.Trim() + " Intended_for_Vehicle_Assembly_Plant_use=" + intended);
             	}
             }
         }
@@ -204,7 +214,7 @@ namespace CaldsScriptGenerator
             	foreach (string part in parts)
             	{
                     // Set up a pattern to test for a cal that is an array (like "NAME(1/33 0)") 
-                    string command = "Mkcopy member=" + part;
+                    string command = "Mkcopy member=" + part.Trim();
                     string pattern = @"(.+)\.([A-Za-z]{2})";
                 
                     // Does the part include it's dls (12345678.AB)?
@@ -223,7 +233,7 @@ namespace CaldsScriptGenerator
             {
             	foreach (string part in parts)
             	{
-            	    tw.WriteLine("chcalcopy calcopy=" + part + " swpart=" + chcalcopySwPartTextBox.Text + " terse");
+            	    tw.WriteLine("chcalcopy calcopy=" + part.Trim() + " swpart=" + chcalcopySwPartTextBox.Text.Trim() + " terse");
             	}
             }
         }
@@ -234,7 +244,7 @@ namespace CaldsScriptGenerator
             {
             	foreach (string part in parts)
             	{
-                    tw.WriteLine("Copy_Bench_Values copy=" + part);
+            	    tw.WriteLine("Copy_Bench_Values copy=" + part.Trim());
             	}
             }
         }
@@ -250,7 +260,8 @@ namespace CaldsScriptGenerator
                 File.WriteAllText(outputFolderTextBox.Text + "\\" + PartsListFile, partNumSrcTextBox.Text);
 
                 // Write the cal name, index, and value to the eng script file.
-                if (writeCalsToFile() == false) {
+                if (writeCalsToFile() == false) 
+                {
                     UpdateStatusBar("Eng script not written. Cal data not right.");
                     return;
                 }
@@ -265,12 +276,14 @@ namespace CaldsScriptGenerator
             TextWriter tw = new StreamWriter(outputFolderTextBox.Text + "\\" + EngScriptFile);
 
             // Write the cals to an engineering script.
-            for (int i = 0; i < calNameTextBox.Lines.Length; i++) {
+            for (int i = 0; i < calNameTextBox.Lines.Length; i++) 
+            {
         	    // If the part isn't blank add it to the list.
-        	    if (calNameTextBox.Lines[i] != "") {
-                    tw.WriteLine("cu\t" + calNameTextBox.Lines[i] + 
-        	                     "\t" + calIndexTextBox.Lines[i] + 
-        	                     "\t" + calValTextBox.Lines[i]);
+        	    if (calNameTextBox.Lines[i] != "") 
+        	    {
+        	        tw.WriteLine("cu\t" + calNameTextBox.Lines[i].Trim() +
+        	                     "\t" + calIndexTextBox.Lines[i].Trim() +
+        	                     "\t" + calValTextBox.Lines[i].Trim());
         	        rv = true;
                 }
         	}
@@ -305,7 +318,7 @@ namespace CaldsScriptGenerator
             	{
                 	for (int i = 0; i < pin.Length; i++)
                 	{
-                	    tw.WriteLine("transfer object=" + pin[i] + " copy=" + pout[i] + " terse");
+                	    tw.WriteLine("transfer object=" + pin[i].Trim() + " copy=" + pout[i].Trim() + " terse");
                 	}
             	}
                 else
@@ -322,7 +335,7 @@ namespace CaldsScriptGenerator
             {
             	foreach (string part in parts)
             	{
-                    tw.WriteLine("bldimage object=" + part);
+            	    tw.WriteLine("bldimage object=" + part.Trim());
             	}
             }
         }
@@ -346,7 +359,7 @@ namespace CaldsScriptGenerator
             	{
                 	for (int i = 0; i < pin.Length; i++)
                 	{
-                	    tw.WriteLine("upload copy=" + pout[i] + " ptpfile=" + pin[i] + ".pta ptponly");
+                	    tw.WriteLine("upload copy=" + pout[i].Trim() + " ptpfile=" + pin[i].Trim() + ".pta ptponly");
                 	}
             	}
                 else
@@ -386,7 +399,7 @@ namespace CaldsScriptGenerator
                 {
                     foreach (string part in parts)
                 	{
-                        tw.WriteLine("Checkin_Copy copy=" + part + " logmessage=" + logMsg +
+                        tw.WriteLine("Checkin_Copy copy=" + part.Trim() + " logmessage=" + logMsg +
                                       " revname=" + revName + rel);
                 	}
                 }
@@ -399,7 +412,7 @@ namespace CaldsScriptGenerator
             {
             	foreach (string part in parts)
             	{
-                    tw.WriteLine("Create_Class2 object=" + part);
+            	    tw.WriteLine("Create_Class2 object=" + part.Trim());
             	}
             }
         }
@@ -410,8 +423,9 @@ namespace CaldsScriptGenerator
             {
             	foreach (string part in parts)
             	{
-                    tw.WriteLine("calplot object=" + Regex.Replace(part, @"(\w)\.[a-zA-Z]{2}", "$1") + 
-                                 " output=" + prefixTextBox.Text + part + "." + extTextBox.Text);
+                    // The Regex.Replace is removing any extension.
+                    tw.WriteLine("calplot object=" + Regex.Replace(part.Trim(), @"(\w)\.[a-zA-Z]{2}", "$1") +
+            	                 " output=" + prefixTextBox.Text.Trim() + part.Trim() + "." + extTextBox.Text.Trim());
             	}
             }
         }
