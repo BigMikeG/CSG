@@ -98,6 +98,7 @@ namespace CaldsScriptGenerator
             this.devRelRadioButton = new System.Windows.Forms.RadioButton();
             this.ppvRelRadioButton = new System.Windows.Forms.RadioButton();
             this.valRelRadioButton = new System.Windows.Forms.RadioButton();
+            this.unixFormatCheckBox = new System.Windows.Forms.CheckBox();
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel3.SuspendLayout();
             this.menuStrip1.SuspendLayout();
@@ -689,12 +690,22 @@ namespace CaldsScriptGenerator
             this.valRelRadioButton.Text = "Validation Release";
             this.valRelRadioButton.UseVisualStyleBackColor = true;
             // 
+            // unixFormatCheckBox
+            // 
+            this.unixFormatCheckBox.Location = new System.Drawing.Point(718, 642);
+            this.unixFormatCheckBox.Name = "unixFormatCheckBox";
+            this.unixFormatCheckBox.Size = new System.Drawing.Size(104, 24);
+            this.unixFormatCheckBox.TabIndex = 49;
+            this.unixFormatCheckBox.Text = "Unix Format";
+            this.unixFormatCheckBox.UseVisualStyleBackColor = true;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
             this.ClientSize = new System.Drawing.Size(992, 693);
+            this.Controls.Add(this.unixFormatCheckBox);
             this.Controls.Add(this.valRelRadioButton);
             this.Controls.Add(this.ppvRelRadioButton);
             this.Controls.Add(this.devRelRadioButton);
@@ -748,6 +759,7 @@ namespace CaldsScriptGenerator
             this.ResumeLayout(false);
             this.PerformLayout();
         }
+        private System.Windows.Forms.CheckBox unixFormatCheckBox;
         private System.Windows.Forms.RadioButton valRelRadioButton;
         private System.Windows.Forms.RadioButton ppvRelRadioButton;
         private System.Windows.Forms.RadioButton devRelRadioButton;

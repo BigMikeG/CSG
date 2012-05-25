@@ -107,7 +107,10 @@ namespace CaldsScriptGenerator
             TextWriter tw = new StreamWriter(outputFolderTextBox.Text + "\\" + ProcessScriptFile);
         	
             // Set new line character to Unix style because Filezilla won't convert the new line using SFTP.
-            tw.NewLine = "\n";
+            if (unixFormatCheckBox.Checked) 
+            {
+                tw.NewLine = "\n";
+            }
         	
             waDefault(tw);
             mkHandle(tw);
@@ -256,9 +259,16 @@ namespace CaldsScriptGenerator
                 // Write the Batch Cal Edit command to the Process Script.
                 tw.WriteLine("Batch_caledit file=" + PartsListFile + " script=" + EngScriptFile);
 
-                // Write the source parts list (changing the new line to unix character) to a file.
-                File.WriteAllText(outputFolderTextBox.Text + "\\" + PartsListFile, partNumSrcTextBox.Text.Replace("\r\n", "\n"));
-
+                // Write the source parts list to a file.
+                if (unixFormatCheckBox.Checked)
+                {
+                    // Unix format.
+                    File.WriteAllText(outputFolderTextBox.Text + "\\" + PartsListFile, partNumSrcTextBox.Text.Replace("\r\n", "\n"));
+                }
+                else
+                {
+                    File.WriteAllText(outputFolderTextBox.Text + "\\" + PartsListFile, partNumSrcTextBox.Text);
+                }
                 // Write the cal name, index, and value to the eng script file.
                 if (writeCalsToFile() == false) 
                 {
@@ -276,7 +286,10 @@ namespace CaldsScriptGenerator
             TextWriter tw = new StreamWriter(outputFolderTextBox.Text + "\\" + EngScriptFile);
 
             // Set new line character to Unix style because Filezilla won't convert the new line using SFTP.
-            tw.NewLine = "\n";
+            if (unixFormatCheckBox.Checked) 
+            {
+                tw.NewLine = "\n";
+            }
         	
             // Write the cals to an engineering script.
             for (int i = 0; i < calNameTextBox.Lines.Length; i++) 
@@ -541,7 +554,7 @@ namespace CaldsScriptGenerator
                                 calIndexTextBox.AppendText(Environment.NewLine);
     
                                 // Add the cal hex value to the textbox.
-                                calValTextBox.AppendText(field[3]);
+                                calValTextBox.AppendText(field[3].PadLeft(2, '0'));
                                 calValTextBox.AppendText(Environment.NewLine);
                             }
                         }
