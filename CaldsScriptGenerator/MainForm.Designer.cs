@@ -41,7 +41,7 @@ namespace CaldsScriptGenerator
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.calValTextBox = new System.Windows.Forms.TextBox();
-            this.calIndexTextBox = new System.Windows.Forms.TextBox();
+            this.calOffsetTextBox = new System.Windows.Forms.TextBox();
             this.calNameTextBox = new System.Windows.Forms.TextBox();
             this.partNumSrcTextBox = new System.Windows.Forms.TextBox();
             this.partsListDestButton = new System.Windows.Forms.Button();
@@ -119,7 +119,7 @@ namespace CaldsScriptGenerator
             this.tableLayoutPanel1.Controls.Add(this.label2, 4, 0);
             this.tableLayoutPanel1.Controls.Add(this.label1, 3, 0);
             this.tableLayoutPanel1.Controls.Add(this.calValTextBox, 4, 1);
-            this.tableLayoutPanel1.Controls.Add(this.calIndexTextBox, 3, 1);
+            this.tableLayoutPanel1.Controls.Add(this.calOffsetTextBox, 3, 1);
             this.tableLayoutPanel1.Controls.Add(this.calNameTextBox, 2, 1);
             this.tableLayoutPanel1.Controls.Add(this.partNumSrcTextBox, 0, 1);
             this.tableLayoutPanel1.Controls.Add(this.partsListDestButton, 1, 0);
@@ -133,14 +133,14 @@ namespace CaldsScriptGenerator
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 540F));
             this.tableLayoutPanel1.Size = new System.Drawing.Size(686, 582);
-            this.tableLayoutPanel1.TabIndex = 0;
+            this.tableLayoutPanel1.TabIndex = 2;
             // 
             // label2
             // 
             this.label2.Location = new System.Drawing.Point(582, 0);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(39, 21);
-            this.label2.TabIndex = 47;
+            this.label2.TabIndex = 8;
             this.label2.Text = "Value";
             this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
@@ -149,7 +149,7 @@ namespace CaldsScriptGenerator
             this.label1.Location = new System.Drawing.Point(524, 0);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(39, 21);
-            this.label1.TabIndex = 46;
+            this.label1.TabIndex = 6;
             this.label1.Text = "Offset";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
@@ -163,21 +163,21 @@ namespace CaldsScriptGenerator
             this.calValTextBox.Name = "calValTextBox";
             this.calValTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Both;
             this.calValTextBox.Size = new System.Drawing.Size(81, 534);
-            this.calValTextBox.TabIndex = 48;
+            this.calValTextBox.TabIndex = 9;
             this.calValTextBox.WordWrap = false;
             // 
             // calIndexTextBox
             // 
-            this.calIndexTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.calOffsetTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
                                     | System.Windows.Forms.AnchorStyles.Left) 
                                     | System.Windows.Forms.AnchorStyles.Right)));
-            this.calIndexTextBox.Location = new System.Drawing.Point(524, 45);
-            this.calIndexTextBox.Multiline = true;
-            this.calIndexTextBox.Name = "calIndexTextBox";
-            this.calIndexTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.calIndexTextBox.Size = new System.Drawing.Size(52, 534);
-            this.calIndexTextBox.TabIndex = 47;
-            this.calIndexTextBox.WordWrap = false;
+            this.calOffsetTextBox.Location = new System.Drawing.Point(524, 45);
+            this.calOffsetTextBox.Multiline = true;
+            this.calOffsetTextBox.Name = "calIndexTextBox";
+            this.calOffsetTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Both;
+            this.calOffsetTextBox.Size = new System.Drawing.Size(52, 534);
+            this.calOffsetTextBox.TabIndex = 7;
+            this.calOffsetTextBox.WordWrap = false;
             // 
             // calNameTextBox
             // 
@@ -189,7 +189,7 @@ namespace CaldsScriptGenerator
             this.calNameTextBox.Name = "calNameTextBox";
             this.calNameTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Both;
             this.calNameTextBox.Size = new System.Drawing.Size(303, 534);
-            this.calNameTextBox.TabIndex = 47;
+            this.calNameTextBox.TabIndex = 5;
             this.calNameTextBox.WordWrap = false;
             // 
             // partNumSrcTextBox
@@ -202,7 +202,7 @@ namespace CaldsScriptGenerator
             this.partNumSrcTextBox.Name = "partNumSrcTextBox";
             this.partNumSrcTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Both;
             this.partNumSrcTextBox.Size = new System.Drawing.Size(99, 534);
-            this.partNumSrcTextBox.TabIndex = 47;
+            this.partNumSrcTextBox.TabIndex = 1;
             this.partNumSrcTextBox.WordWrap = false;
             // 
             // partsListDestButton
@@ -212,7 +212,7 @@ namespace CaldsScriptGenerator
             this.partsListDestButton.Location = new System.Drawing.Point(108, 3);
             this.partsListDestButton.Name = "partsListDestButton";
             this.partsListDestButton.Size = new System.Drawing.Size(55, 36);
-            this.partsListDestButton.TabIndex = 43;
+            this.partsListDestButton.TabIndex = 2;
             this.partsListDestButton.Text = "Add Dst\r\nParts";
             this.partsListDestButton.UseVisualStyleBackColor = true;
             this.partsListDestButton.Click += new System.EventHandler(this.PartsListDestButtonClick);
@@ -227,7 +227,7 @@ namespace CaldsScriptGenerator
             this.partNumDestTextBox.Name = "partNumDestTextBox";
             this.partNumDestTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Both;
             this.partNumDestTextBox.Size = new System.Drawing.Size(101, 534);
-            this.partNumDestTextBox.TabIndex = 46;
+            this.partNumDestTextBox.TabIndex = 3;
             this.partNumDestTextBox.WordWrap = false;
             // 
             // partsListOpenButton
@@ -237,7 +237,7 @@ namespace CaldsScriptGenerator
             this.partsListOpenButton.Location = new System.Drawing.Point(3, 3);
             this.partsListOpenButton.Name = "partsListOpenButton";
             this.partsListOpenButton.Size = new System.Drawing.Size(58, 36);
-            this.partsListOpenButton.TabIndex = 4;
+            this.partsListOpenButton.TabIndex = 0;
             this.partsListOpenButton.Text = "Add Src \r\nParts";
             this.partsListOpenButton.UseVisualStyleBackColor = true;
             this.partsListOpenButton.Click += new System.EventHandler(this.PartsListSrcButtonClick);
@@ -249,7 +249,7 @@ namespace CaldsScriptGenerator
             this.engScriptOpenButton.Location = new System.Drawing.Point(215, 3);
             this.engScriptOpenButton.Name = "engScriptOpenButton";
             this.engScriptOpenButton.Size = new System.Drawing.Size(59, 23);
-            this.engScriptOpenButton.TabIndex = 2;
+            this.engScriptOpenButton.TabIndex = 4;
             this.engScriptOpenButton.Text = "Add Cals";
             this.engScriptOpenButton.UseVisualStyleBackColor = true;
             this.engScriptOpenButton.Click += new System.EventHandler(this.EngScriptOpenButtonClick);
@@ -259,7 +259,7 @@ namespace CaldsScriptGenerator
             this.CalVScrollBar.Location = new System.Drawing.Point(666, 42);
             this.CalVScrollBar.Name = "CalVScrollBar";
             this.CalVScrollBar.Size = new System.Drawing.Size(17, 517);
-            this.CalVScrollBar.TabIndex = 49;
+            this.CalVScrollBar.TabIndex = 10;
             this.CalVScrollBar.Visible = false;
             this.CalVScrollBar.Scroll += new System.Windows.Forms.ScrollEventHandler(this.CalVScrollBarScroll);
             // 
@@ -282,7 +282,7 @@ namespace CaldsScriptGenerator
             this.mkcopyCheckBox.Location = new System.Drawing.Point(718, 206);
             this.mkcopyCheckBox.Name = "mkcopyCheckBox";
             this.mkcopyCheckBox.Size = new System.Drawing.Size(80, 17);
-            this.mkcopyCheckBox.TabIndex = 7;
+            this.mkcopyCheckBox.TabIndex = 13;
             this.mkcopyCheckBox.Text = "Make Copy";
             this.mkcopyCheckBox.UseVisualStyleBackColor = true;
             // 
@@ -292,7 +292,7 @@ namespace CaldsScriptGenerator
             this.batchCaleditCheckBox.Location = new System.Drawing.Point(718, 370);
             this.batchCaleditCheckBox.Name = "batchCaleditCheckBox";
             this.batchCaleditCheckBox.Size = new System.Drawing.Size(93, 17);
-            this.batchCaleditCheckBox.TabIndex = 8;
+            this.batchCaleditCheckBox.TabIndex = 21;
             this.batchCaleditCheckBox.Text = "Batch Cal Edit";
             this.batchCaleditCheckBox.UseVisualStyleBackColor = true;
             // 
@@ -302,7 +302,7 @@ namespace CaldsScriptGenerator
             this.checkincopyCheckBox.Location = new System.Drawing.Point(718, 394);
             this.checkincopyCheckBox.Name = "checkincopyCheckBox";
             this.checkincopyCheckBox.Size = new System.Drawing.Size(92, 17);
-            this.checkincopyCheckBox.TabIndex = 9;
+            this.checkincopyCheckBox.TabIndex = 22;
             this.checkincopyCheckBox.Text = "Checkin Copy";
             this.checkincopyCheckBox.UseVisualStyleBackColor = true;
             // 
@@ -311,14 +311,14 @@ namespace CaldsScriptGenerator
             this.logMessageTextBox.Location = new System.Drawing.Point(736, 491);
             this.logMessageTextBox.Name = "logMessageTextBox";
             this.logMessageTextBox.Size = new System.Drawing.Size(100, 20);
-            this.logMessageTextBox.TabIndex = 16;
+            this.logMessageTextBox.TabIndex = 26;
             // 
             // revNameTextBox
             // 
             this.revNameTextBox.Location = new System.Drawing.Point(736, 517);
             this.revNameTextBox.Name = "revNameTextBox";
             this.revNameTextBox.Size = new System.Drawing.Size(100, 20);
-            this.revNameTextBox.TabIndex = 17;
+            this.revNameTextBox.TabIndex = 28;
             // 
             // createClass2CheckBox
             // 
@@ -326,7 +326,7 @@ namespace CaldsScriptGenerator
             this.createClass2CheckBox.Location = new System.Drawing.Point(718, 543);
             this.createClass2CheckBox.Name = "createClass2CheckBox";
             this.createClass2CheckBox.Size = new System.Drawing.Size(94, 17);
-            this.createClass2CheckBox.TabIndex = 18;
+            this.createClass2CheckBox.TabIndex = 30;
             this.createClass2CheckBox.Text = "Create Class 2";
             this.createClass2CheckBox.UseVisualStyleBackColor = true;
             // 
@@ -336,7 +336,7 @@ namespace CaldsScriptGenerator
             this.calplotCheckBox.Location = new System.Drawing.Point(718, 566);
             this.calplotCheckBox.Name = "calplotCheckBox";
             this.calplotCheckBox.Size = new System.Drawing.Size(58, 17);
-            this.calplotCheckBox.TabIndex = 19;
+            this.calplotCheckBox.TabIndex = 31;
             this.calplotCheckBox.Text = "Calplot";
             this.calplotCheckBox.UseVisualStyleBackColor = true;
             // 
@@ -345,7 +345,7 @@ namespace CaldsScriptGenerator
             this.prefixTextBox.Location = new System.Drawing.Point(736, 589);
             this.prefixTextBox.Name = "prefixTextBox";
             this.prefixTextBox.Size = new System.Drawing.Size(100, 20);
-            this.prefixTextBox.TabIndex = 20;
+            this.prefixTextBox.TabIndex = 32;
             this.prefixTextBox.Text = "cp_";
             // 
             // extTextBox
@@ -353,7 +353,7 @@ namespace CaldsScriptGenerator
             this.extTextBox.Location = new System.Drawing.Point(736, 615);
             this.extTextBox.Name = "extTextBox";
             this.extTextBox.Size = new System.Drawing.Size(100, 20);
-            this.extTextBox.TabIndex = 21;
+            this.extTextBox.TabIndex = 34;
             this.extTextBox.Text = "txt";
             // 
             // activateCheckBox
@@ -362,7 +362,7 @@ namespace CaldsScriptGenerator
             this.activateCheckBox.Location = new System.Drawing.Point(718, 160);
             this.activateCheckBox.Name = "activateCheckBox";
             this.activateCheckBox.Size = new System.Drawing.Size(87, 17);
-            this.activateCheckBox.TabIndex = 23;
+            this.activateCheckBox.TabIndex = 11;
             this.activateCheckBox.Text = "Activate Part";
             this.activateCheckBox.UseVisualStyleBackColor = true;
             // 
@@ -372,7 +372,7 @@ namespace CaldsScriptGenerator
             this.chcalcopyCheckBox.Location = new System.Drawing.Point(718, 229);
             this.chcalcopyCheckBox.Name = "chcalcopyCheckBox";
             this.chcalcopyCheckBox.Size = new System.Drawing.Size(108, 17);
-            this.chcalcopyCheckBox.TabIndex = 22;
+            this.chcalcopyCheckBox.TabIndex = 14;
             this.chcalcopyCheckBox.Text = "Change Cal Copy";
             this.chcalcopyCheckBox.UseVisualStyleBackColor = true;
             // 
@@ -381,7 +381,7 @@ namespace CaldsScriptGenerator
             this.goButton.Location = new System.Drawing.Point(881, 640);
             this.goButton.Name = "goButton";
             this.goButton.Size = new System.Drawing.Size(75, 23);
-            this.goButton.TabIndex = 2;
+            this.goButton.TabIndex = 37;
             this.goButton.Text = "Go";
             this.goButton.UseVisualStyleBackColor = true;
             this.goButton.Click += new System.EventHandler(this.GoButtonClick);
@@ -403,7 +403,7 @@ namespace CaldsScriptGenerator
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayoutPanel3.Size = new System.Drawing.Size(689, 29);
-            this.tableLayoutPanel3.TabIndex = 3;
+            this.tableLayoutPanel3.TabIndex = 1;
             // 
             // outputFolderButton
             // 
@@ -412,7 +412,7 @@ namespace CaldsScriptGenerator
             this.outputFolderButton.Location = new System.Drawing.Point(660, 3);
             this.outputFolderButton.Name = "outputFolderButton";
             this.outputFolderButton.Size = new System.Drawing.Size(26, 23);
-            this.outputFolderButton.TabIndex = 5;
+            this.outputFolderButton.TabIndex = 2;
             this.outputFolderButton.Text = "...";
             this.outputFolderButton.UseVisualStyleBackColor = true;
             this.outputFolderButton.Click += new System.EventHandler(this.OutputFolderButtonClick);
@@ -422,14 +422,14 @@ namespace CaldsScriptGenerator
             this.outputFolderTextBox.Location = new System.Drawing.Point(80, 3);
             this.outputFolderTextBox.Name = "outputFolderTextBox";
             this.outputFolderTextBox.Size = new System.Drawing.Size(574, 20);
-            this.outputFolderTextBox.TabIndex = 11;
+            this.outputFolderTextBox.TabIndex = 1;
             // 
             // outputFolderLabel
             // 
             this.outputFolderLabel.Location = new System.Drawing.Point(3, 0);
             this.outputFolderLabel.Name = "outputFolderLabel";
             this.outputFolderLabel.Size = new System.Drawing.Size(71, 21);
-            this.outputFolderLabel.TabIndex = 4;
+            this.outputFolderLabel.TabIndex = 0;
             this.outputFolderLabel.Text = "Output Folder";
             this.outputFolderLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
@@ -438,14 +438,14 @@ namespace CaldsScriptGenerator
             this.chcalcopySwPartTextBox.Location = new System.Drawing.Point(736, 252);
             this.chcalcopySwPartTextBox.Name = "chcalcopySwPartTextBox";
             this.chcalcopySwPartTextBox.Size = new System.Drawing.Size(100, 20);
-            this.chcalcopySwPartTextBox.TabIndex = 24;
+            this.chcalcopySwPartTextBox.TabIndex = 15;
             // 
             // swPartLabel
             // 
             this.swPartLabel.Location = new System.Drawing.Point(842, 251);
             this.swPartLabel.Name = "swPartLabel";
             this.swPartLabel.Size = new System.Drawing.Size(52, 21);
-            this.swPartLabel.TabIndex = 25;
+            this.swPartLabel.TabIndex = 16;
             this.swPartLabel.Text = "SW Part";
             this.swPartLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
@@ -454,7 +454,7 @@ namespace CaldsScriptGenerator
             this.logMessageLlabel.Location = new System.Drawing.Point(842, 489);
             this.logMessageLlabel.Name = "logMessageLlabel";
             this.logMessageLlabel.Size = new System.Drawing.Size(74, 23);
-            this.logMessageLlabel.TabIndex = 26;
+            this.logMessageLlabel.TabIndex = 27;
             this.logMessageLlabel.Text = "Log Message";
             this.logMessageLlabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
@@ -463,7 +463,7 @@ namespace CaldsScriptGenerator
             this.revNameLabel.Location = new System.Drawing.Point(842, 515);
             this.revNameLabel.Name = "revNameLabel";
             this.revNameLabel.Size = new System.Drawing.Size(74, 23);
-            this.revNameLabel.TabIndex = 27;
+            this.revNameLabel.TabIndex = 29;
             this.revNameLabel.Text = "Rev Name";
             this.revNameLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
@@ -472,7 +472,7 @@ namespace CaldsScriptGenerator
             this.prefixLabel.Location = new System.Drawing.Point(842, 587);
             this.prefixLabel.Name = "prefixLabel";
             this.prefixLabel.Size = new System.Drawing.Size(74, 23);
-            this.prefixLabel.TabIndex = 28;
+            this.prefixLabel.TabIndex = 33;
             this.prefixLabel.Text = "Prefix";
             this.prefixLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
@@ -481,7 +481,7 @@ namespace CaldsScriptGenerator
             this.extLabel.Location = new System.Drawing.Point(842, 613);
             this.extLabel.Name = "extLabel";
             this.extLabel.Size = new System.Drawing.Size(74, 23);
-            this.extLabel.TabIndex = 29;
+            this.extLabel.TabIndex = 35;
             this.extLabel.Text = "Extension";
             this.extLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
@@ -491,7 +491,7 @@ namespace CaldsScriptGenerator
             this.intendedCheckBox.Location = new System.Drawing.Point(736, 183);
             this.intendedCheckBox.Name = "intendedCheckBox";
             this.intendedCheckBox.Size = new System.Drawing.Size(220, 17);
-            this.intendedCheckBox.TabIndex = 30;
+            this.intendedCheckBox.TabIndex = 12;
             this.intendedCheckBox.Text = "Intended For Vehicle Assembly Plant Use";
             this.intendedCheckBox.UseVisualStyleBackColor = true;
             // 
@@ -501,7 +501,7 @@ namespace CaldsScriptGenerator
             this.copyBenchCheckBox.Location = new System.Drawing.Point(718, 278);
             this.copyBenchCheckBox.Name = "copyBenchCheckBox";
             this.copyBenchCheckBox.Size = new System.Drawing.Size(119, 17);
-            this.copyBenchCheckBox.TabIndex = 32;
+            this.copyBenchCheckBox.TabIndex = 17;
             this.copyBenchCheckBox.Text = "Copy Bench Values";
             this.copyBenchCheckBox.UseVisualStyleBackColor = true;
             // 
@@ -512,7 +512,7 @@ namespace CaldsScriptGenerator
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(992, 24);
-            this.menuStrip1.TabIndex = 33;
+            this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
             // helpToolStripMenuItem
@@ -546,7 +546,7 @@ namespace CaldsScriptGenerator
             this.statusStrip1.Location = new System.Drawing.Point(0, 671);
             this.statusStrip1.Name = "statusStrip1";
             this.statusStrip1.Size = new System.Drawing.Size(992, 22);
-            this.statusStrip1.TabIndex = 34;
+            this.statusStrip1.TabIndex = 38;
             this.statusStrip1.Text = "statusStrip1";
             // 
             // toolStripStatusLabel1
@@ -561,7 +561,7 @@ namespace CaldsScriptGenerator
             this.waDefaultCheckBox.Location = new System.Drawing.Point(718, 36);
             this.waDefaultCheckBox.Name = "waDefaultCheckBox";
             this.waDefaultCheckBox.Size = new System.Drawing.Size(114, 17);
-            this.waDefaultCheckBox.TabIndex = 35;
+            this.waDefaultCheckBox.TabIndex = 3;
             this.waDefaultCheckBox.Text = "Work Area Default";
             this.waDefaultCheckBox.UseVisualStyleBackColor = true;
             // 
@@ -570,14 +570,14 @@ namespace CaldsScriptGenerator
             this.waDefSwPartTextBox.Location = new System.Drawing.Point(736, 59);
             this.waDefSwPartTextBox.Name = "waDefSwPartTextBox";
             this.waDefSwPartTextBox.Size = new System.Drawing.Size(100, 20);
-            this.waDefSwPartTextBox.TabIndex = 36;
+            this.waDefSwPartTextBox.TabIndex = 4;
             // 
             // waDefSwPartLabel
             // 
             this.waDefSwPartLabel.Location = new System.Drawing.Point(842, 58);
             this.waDefSwPartLabel.Name = "waDefSwPartLabel";
             this.waDefSwPartLabel.Size = new System.Drawing.Size(52, 21);
-            this.waDefSwPartLabel.TabIndex = 37;
+            this.waDefSwPartLabel.TabIndex = 5;
             this.waDefSwPartLabel.Text = "SW Part";
             this.waDefSwPartLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
@@ -586,14 +586,14 @@ namespace CaldsScriptGenerator
             this.waDefLibTextBox.Location = new System.Drawing.Point(736, 85);
             this.waDefLibTextBox.Name = "waDefLibTextBox";
             this.waDefLibTextBox.Size = new System.Drawing.Size(100, 20);
-            this.waDefLibTextBox.TabIndex = 38;
+            this.waDefLibTextBox.TabIndex = 6;
             // 
             // waDefLibLabel
             // 
             this.waDefLibLabel.Location = new System.Drawing.Point(842, 84);
             this.waDefLibLabel.Name = "waDefLibLabel";
             this.waDefLibLabel.Size = new System.Drawing.Size(52, 21);
-            this.waDefLibLabel.TabIndex = 39;
+            this.waDefLibLabel.TabIndex = 7;
             this.waDefLibLabel.Text = "Library";
             this.waDefLibLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
@@ -603,7 +603,7 @@ namespace CaldsScriptGenerator
             this.mkHandleCheckBox.Location = new System.Drawing.Point(718, 111);
             this.mkHandleCheckBox.Name = "mkHandleCheckBox";
             this.mkHandleCheckBox.Size = new System.Drawing.Size(90, 17);
-            this.mkHandleCheckBox.TabIndex = 40;
+            this.mkHandleCheckBox.TabIndex = 8;
             this.mkHandleCheckBox.Text = "Make Handle";
             this.mkHandleCheckBox.UseVisualStyleBackColor = true;
             // 
@@ -612,14 +612,14 @@ namespace CaldsScriptGenerator
             this.mkHandleSwPartTextBox.Location = new System.Drawing.Point(736, 134);
             this.mkHandleSwPartTextBox.Name = "mkHandleSwPartTextBox";
             this.mkHandleSwPartTextBox.Size = new System.Drawing.Size(100, 20);
-            this.mkHandleSwPartTextBox.TabIndex = 41;
+            this.mkHandleSwPartTextBox.TabIndex = 9;
             // 
             // mkHandleSwPartLabel
             // 
             this.mkHandleSwPartLabel.Location = new System.Drawing.Point(842, 133);
             this.mkHandleSwPartLabel.Name = "mkHandleSwPartLabel";
             this.mkHandleSwPartLabel.Size = new System.Drawing.Size(52, 21);
-            this.mkHandleSwPartLabel.TabIndex = 42;
+            this.mkHandleSwPartLabel.TabIndex = 10;
             this.mkHandleSwPartLabel.Text = "SW Part";
             this.mkHandleSwPartLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
@@ -629,7 +629,7 @@ namespace CaldsScriptGenerator
             this.transferCheckBox.Location = new System.Drawing.Point(718, 301);
             this.transferCheckBox.Name = "transferCheckBox";
             this.transferCheckBox.Size = new System.Drawing.Size(65, 17);
-            this.transferCheckBox.TabIndex = 43;
+            this.transferCheckBox.TabIndex = 18;
             this.transferCheckBox.Text = "Transfer";
             this.transferCheckBox.UseVisualStyleBackColor = true;
             // 
@@ -639,7 +639,7 @@ namespace CaldsScriptGenerator
             this.bldImageCheckBox.Location = new System.Drawing.Point(718, 324);
             this.bldImageCheckBox.Name = "bldImageCheckBox";
             this.bldImageCheckBox.Size = new System.Drawing.Size(81, 17);
-            this.bldImageCheckBox.TabIndex = 44;
+            this.bldImageCheckBox.TabIndex = 19;
             this.bldImageCheckBox.Text = "Build Image";
             this.bldImageCheckBox.UseVisualStyleBackColor = true;
             // 
@@ -649,7 +649,7 @@ namespace CaldsScriptGenerator
             this.uploadCheckBox.Location = new System.Drawing.Point(718, 347);
             this.uploadCheckBox.Name = "uploadCheckBox";
             this.uploadCheckBox.Size = new System.Drawing.Size(60, 17);
-            this.uploadCheckBox.TabIndex = 45;
+            this.uploadCheckBox.TabIndex = 20;
             this.uploadCheckBox.Text = "Upload";
             this.uploadCheckBox.UseVisualStyleBackColor = true;
             // 
@@ -667,7 +667,7 @@ namespace CaldsScriptGenerator
             this.devRelRadioButton.Location = new System.Drawing.Point(736, 417);
             this.devRelRadioButton.Name = "devRelRadioButton";
             this.devRelRadioButton.Size = new System.Drawing.Size(130, 24);
-            this.devRelRadioButton.TabIndex = 46;
+            this.devRelRadioButton.TabIndex = 23;
             this.devRelRadioButton.TabStop = true;
             this.devRelRadioButton.Text = "Development Release";
             this.devRelRadioButton.UseVisualStyleBackColor = true;
@@ -677,7 +677,7 @@ namespace CaldsScriptGenerator
             this.ppvRelRadioButton.Location = new System.Drawing.Point(736, 438);
             this.ppvRelRadioButton.Name = "ppvRelRadioButton";
             this.ppvRelRadioButton.Size = new System.Drawing.Size(104, 24);
-            this.ppvRelRadioButton.TabIndex = 47;
+            this.ppvRelRadioButton.TabIndex = 24;
             this.ppvRelRadioButton.Text = "PPV Release";
             this.ppvRelRadioButton.UseVisualStyleBackColor = true;
             // 
@@ -686,7 +686,7 @@ namespace CaldsScriptGenerator
             this.valRelRadioButton.Location = new System.Drawing.Point(736, 461);
             this.valRelRadioButton.Name = "valRelRadioButton";
             this.valRelRadioButton.Size = new System.Drawing.Size(115, 24);
-            this.valRelRadioButton.TabIndex = 48;
+            this.valRelRadioButton.TabIndex = 25;
             this.valRelRadioButton.Text = "Validation Release";
             this.valRelRadioButton.UseVisualStyleBackColor = true;
             // 
@@ -695,7 +695,7 @@ namespace CaldsScriptGenerator
             this.unixFormatCheckBox.Location = new System.Drawing.Point(718, 642);
             this.unixFormatCheckBox.Name = "unixFormatCheckBox";
             this.unixFormatCheckBox.Size = new System.Drawing.Size(104, 24);
-            this.unixFormatCheckBox.TabIndex = 49;
+            this.unixFormatCheckBox.TabIndex = 36;
             this.unixFormatCheckBox.Text = "Unix Format";
             this.unixFormatCheckBox.UseVisualStyleBackColor = true;
             // 
@@ -766,7 +766,7 @@ namespace CaldsScriptGenerator
         private System.Windows.Forms.VScrollBar CalVScrollBar;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox calIndexTextBox;
+        private System.Windows.Forms.TextBox calOffsetTextBox;
         private System.Windows.Forms.TextBox calValTextBox;
         private System.Windows.Forms.TextBox calNameTextBox;
         private System.Windows.Forms.OpenFileDialog openFileDialog2;

@@ -6,6 +6,8 @@
  * 
  * To change this template use Tools | Options | Coding | Edit Standard Headers.
  * 
+ * - Added a check to make sure the cal columns have the same number of items. 
+ * - Set the tab order.
  * - Changed script file output to Unix line endings (no carriage return just linefeed).
  * - Trimmed leading and trailing whitespace from all of the parts and cal data 
  *   before appending to command strings.
@@ -282,36 +284,67 @@ namespace CaldsScriptGenerator
         {
             bool rv = false;
             
-            // Create a writer and open the file (using @ because it ignores escape sequences (such as "\")).
-            TextWriter tw = new StreamWriter(outputFolderTextBox.Text + "\\" + EngScriptFile);
-
-            // Set new line character to Unix style because Filezilla won't convert the new line using SFTP.
-            if (unixFormatCheckBox.Checked) 
+            // Verify that the number of items in each cal column match.
+            if (DoCalTextBoxLengthsMatch())
             {
-                tw.NewLine = "\n";
-            }
-        	
-            // Write the cals to an engineering script.
-            for (int i = 0; i < calNameTextBox.Lines.Length; i++) 
-            {
-        	    // If the part isn't blank add it to the list.
-        	    if (calNameTextBox.Lines[i] != "") 
-        	    {
-        	        tw.WriteLine("cu\t" + calNameTextBox.Lines[i].Trim() +
-        	                     "\t" + calIndexTextBox.Lines[i].Trim() +
-        	                     "\t" + calValTextBox.Lines[i].Trim());
-        	        rv = true;
+                // Create a writer and open the file (using @ because it ignores escape sequences (such as "\")).
+                TextWriter tw = new StreamWriter(outputFolderTextBox.Text + "\\" + EngScriptFile);
+    
+                // Set new line character to Unix style because Filezilla won't convert the new line using SFTP.
+                if (unixFormatCheckBox.Checked) 
+                {
+                    tw.NewLine = "\n";
                 }
-        	}
-
-            tw.WriteLine("sync");
-            tw.WriteLine("wq");
+            	
+                // Write the cals to an engineering script.
+                for (int i = 0; i < calNameTextBox.Lines.Length; i++) 
+                {
+            	    string name   = calNameTextBox.Lines[i].Trim();
+            	    string offset = calOffsetTextBox.Lines[i].Trim();
+            	    string val    = calValTextBox.Lines[i].Trim();
+            	    
+                    // If the part isn't blank add it to the list.
+            	    if ((name != String.Empty) && (offset != String.Empty) && (val != String.Empty))
+            	    {
+            	        tw.WriteLine("cu\t" + name + "\t" + offset + "\t" + val);
+            	        rv = true;
+                    }
+            	}
+    
+                tw.WriteLine("sync");
+                tw.WriteLine("wq");
+                
+                // close the Process Script file.
+                tw.Close();
+    
+            	// Update the status text box.
+                UpdateStatusBar("The Engineering Script file '" + EngScriptFile + "' was created.");
+            }
+            else
+            {
+                string len = "(" 
+                    + calNameTextBox.Lines.Length.ToString() + ", "
+                    + calOffsetTextBox.Lines.Length.ToString() + ", "
+                    + calValTextBox.Lines.Length.ToString() + ")."; 
+                MessageBox.Show("There is something wrong with the cals. The number of items in each list do not match " + len);
+            }
             
-            // close the Process Script file.
-            tw.Close();
-
-        	// Update the status text box.
-            UpdateStatusBar("The Engineering Script file '" + EngScriptFile + "' was created.");
+            return rv;
+        }
+        
+        /// <summary>
+        /// Verifies if the number of items in the cal name, cal offset and cal value match.
+        /// </summary>
+        /// <returns></returns>
+        bool DoCalTextBoxLengthsMatch()
+        {
+            bool rv = false;
+            
+            if ((calNameTextBox.Lines.Length   == calOffsetTextBox.Lines.Length) &&
+                (calOffsetTextBox.Lines.Length == calValTextBox.Lines.Length))
+            {
+                rv = true;
+            }
             
             return rv;
         }
@@ -550,8 +583,8 @@ namespace CaldsScriptGenerator
                                 calNameTextBox.AppendText(Environment.NewLine);
                                 
                                 // Add the cal index to the textbox.
-                                calIndexTextBox.AppendText(field[2]);
-                                calIndexTextBox.AppendText(Environment.NewLine);
+                                calOffsetTextBox.AppendText(field[2]);
+                                calOffsetTextBox.AppendText(Environment.NewLine);
     
                                 // Add the cal hex value to the textbox.
                                 calValTextBox.AppendText(field[3].PadLeft(2, '0'));
