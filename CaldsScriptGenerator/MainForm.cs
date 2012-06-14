@@ -129,9 +129,23 @@ namespace CaldsScriptGenerator
             bldImage(partsSrc, tw);
             upload(partsSrc, partsDst, tw);
             batchCaledit(tw);
-            checkinCopy(partsSrc, tw);
-            createClass2(partsSrc, tw);
-            calplot(partsSrc, tw);
+            
+            // Checkin Copy, Create Class 2, Calplot. 
+            // If the Transfer checkbox is checked, 
+            // Then process the destination parts,
+            // Else process the source parts.
+            if (transferCheckBox.Checked)
+            {
+                checkinCopy(partsDst, tw);
+                createClass2(partsDst, tw);
+                calplot(partsDst, tw);
+            }
+            else
+            {
+                checkinCopy(partsSrc, tw);
+                createClass2(partsSrc, tw);
+                calplot(partsSrc, tw);
+            }
             
             // close the Process Script file.
             tw.Close();
@@ -430,13 +444,16 @@ namespace CaldsScriptGenerator
                 string revName = revNameTextBox.Text.Replace(" ", "");
                 
                 // Set the release string based on the release radio buttons.
-                if (valRelRadioButton.Checked) {
+                if (valRelRadioButton.Checked) 
+                {
                     rel = " Validation_Release";
                 }
-                else if (ppvRelRadioButton.Checked) {
+                else if (ppvRelRadioButton.Checked) 
+                {
                     rel = " PPV_Release";
                 }
-                else {
+                else 
+                {
                     rel = " Development_Release";
                 }
             	
