@@ -68,7 +68,7 @@ namespace CaldsScriptGenerator
             }
         	
             // If the source parts list is needed, verify that it exists.
-            if (isPartsListSrcRequired() && (partNumSrcTextBox.Text.Length == 0)) 
+            if (IsSrcPartsListRequired() && (partNumSrcTextBox.Text.Length == 0)) 
             {
                 UpdateStatusBar("Enter at least 1 source part, please.");
                 return;
@@ -87,7 +87,7 @@ namespace CaldsScriptGenerator
             }
         	
             // If the destination parts list is needed, verify that it exists.
-            if (isPartsListDestRequired() && (partNumDestTextBox.Text.Length == 0)) 
+            if (IsDestPartsListRequired() && (partNumDestTextBox.Text.Length == 0)) 
             {
                 UpdateStatusBar("Enter at least 1 destination part, please.");
                 return;
@@ -131,10 +131,10 @@ namespace CaldsScriptGenerator
             batchCaledit(tw);
             
             // Checkin Copy, Create Class 2, Calplot. 
-            // If the Transfer checkbox is checked, 
+            // If the Upload or Transfer checkboxes are checked, 
             // Then process the destination parts,
             // Else process the source parts.
-            if (transferCheckBox.Checked)
+            if (uploadCheckBox.Checked || transferCheckBox.Checked)
             {
                 checkinCopy(partsDst, tw);
                 createClass2(partsDst, tw);
@@ -158,7 +158,7 @@ namespace CaldsScriptGenerator
         /// This function checks if the source parts list is required.
         /// </summary>
         /// <returns></returns>
-        bool isPartsListSrcRequired()
+        bool IsSrcPartsListRequired()
         {
         	if (activateCheckBox.Checked     ||
                 mkcopyCheckBox.Checked       ||
@@ -183,7 +183,7 @@ namespace CaldsScriptGenerator
         /// This function checks if the destination parts list is required.
         /// </summary>
         /// <returns></returns>
-        bool isPartsListDestRequired()
+        bool IsDestPartsListRequired()
         {
         	if (transferCheckBox.Checked || uploadCheckBox.Checked)
             {
@@ -404,7 +404,7 @@ namespace CaldsScriptGenerator
         }
         
         /// <summary>
-        /// This function builds the upload command and copy it to the process script file.
+        /// This function builds the upload command and copies it to the process script file.
         /// upload copy=2233445566 ptpfile=11223344.pta ptponly
         /// </summary>
         /// <param name="partsSrc"></param>
