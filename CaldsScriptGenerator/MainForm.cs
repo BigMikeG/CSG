@@ -478,7 +478,8 @@ namespace CaldsScriptGenerator
             {
             	foreach (string part in parts)
             	{
-            	    tw.WriteLine("Create_Class2 object=" + part.Trim());
+                    // The Regex.Replace is removing any extension.
+            	    tw.WriteLine("Create_Class2 object=" + Regex.Replace(part.Trim(), @"(\w)\.[a-zA-Z]{2}", "$1"));
             	}
             }
         }

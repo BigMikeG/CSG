@@ -166,14 +166,14 @@ namespace CaldsScriptGenerator
             this.calValTextBox.TabIndex = 9;
             this.calValTextBox.WordWrap = false;
             // 
-            // calIndexTextBox
+            // calOffsetTextBox
             // 
             this.calOffsetTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
                                     | System.Windows.Forms.AnchorStyles.Left) 
                                     | System.Windows.Forms.AnchorStyles.Right)));
             this.calOffsetTextBox.Location = new System.Drawing.Point(524, 45);
             this.calOffsetTextBox.Multiline = true;
-            this.calOffsetTextBox.Name = "calIndexTextBox";
+            this.calOffsetTextBox.Name = "calOffsetTextBox";
             this.calOffsetTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Both;
             this.calOffsetTextBox.Size = new System.Drawing.Size(52, 534);
             this.calOffsetTextBox.TabIndex = 7;
