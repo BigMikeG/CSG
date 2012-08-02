@@ -20,7 +20,7 @@ using System.IO;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
 
-using System.Runtime.InteropServices; // DllImport
+//using System.Runtime.InteropServices; // DllImport
 
 
 namespace CaldsScriptGenerator
@@ -30,13 +30,13 @@ namespace CaldsScriptGenerator
     /// </summary>
     public partial class MainForm : Form
     {
-        [DllImport("user32.dll")]
-        static extern int SetScrollPos(IntPtr hWnd, int nBar, 
-                                       int nPos, bool bRedraw);
-        [DllImport("user32.dll")]
-        static extern int SendMessage(IntPtr hWnd, int wMsg, 
-                               int wParam, int lParam);
-        const int EM_LINESCROLL = 0x00B6;
+//        [DllImport("user32.dll")]
+//        static extern int SetScrollPos(IntPtr hWnd, int nBar, 
+//                                       int nPos, bool bRedraw);
+//        [DllImport("user32.dll")]
+//        static extern int SendMessage(IntPtr hWnd, int wMsg, 
+//                               int wParam, int lParam);
+//        const int EM_LINESCROLL = 0x00B6;
         
         string ProcessScriptFile = "CalGenProcessScript.txt";
         string EngScriptFile     = "CalGenEngScript.txt";
@@ -105,6 +105,12 @@ namespace CaldsScriptGenerator
             	}
             }
             
+            // Ask the user to confirm the Checkin Copy or Update Status if selected.
+            if (ConfirmCheckinCopyUpdateStatus() == false)
+            {
+                return;
+            }
+            
             // Create a writer and open the file (using @ because it ignores escape sequences (such as "\")).
             TextWriter tw = new StreamWriter(outputFolderTextBox.Text + "\\" + ProcessScriptFile);
         	
@@ -130,29 +136,61 @@ namespace CaldsScriptGenerator
             upload(partsSrc, partsDst, tw);
             batchCaledit(tw);
             
-            // Checkin Copy, Create Class 2, Calplot. 
+            // Checkin Copy, Update Status, Create Class 2, Calplot. 
             // If the Upload or Transfer checkboxes are checked, 
             // Then process the destination parts,
             // Else process the source parts.
             if (uploadCheckBox.Checked || transferCheckBox.Checked)
             {
                 checkinCopy(partsDst, tw);
+                updateStatus(partsDst, tw);
                 createClass2(partsDst, tw);
                 calplot(partsDst, tw);
             }
             else
             {
                 checkinCopy(partsSrc, tw);
+                updateStatus(partsSrc, tw);
                 createClass2(partsSrc, tw);
                 calplot(partsSrc, tw);
             }
             
             // close the Process Script file.
             tw.Close();
-
+            
         	// Update the status text box.
             UpdateStatusBar("The Process Script file '" + ProcessScriptFile + "' was created.");
         }
+
+        bool ConfirmCheckinCopyUpdateStatus()
+        {
+            bool rv = true;
+            if (checkinCopyRadioButton.Checked || updateStatusRadioButton.Checked)
+            {
+    			// Initializes the variables to pass to the MessageBox.Show method.
+                string caption = "Confirmation Required";
+    			string message = "You have selected either Checkin Copy or Update Status. " +
+    			    "Please click Yes to confirm or No to cancel.";
+    			MessageBoxButtons buttons = MessageBoxButtons.YesNo;
+    			DialogResult result;
+    
+    			// Displays the MessageBox.
+    			result = MessageBox.Show(message, caption, buttons);
+    
+    			if (result == System.Windows.Forms.DialogResult.No)
+    			{
+                    // Clear the Checkin Copy and Update Status radio buttons (to make 
+                    // sure that neither is accidentally left enabled).
+                    checkinCopyRadioButton.Checked = false;
+                    updateStatusRadioButton.Checked = false;
+            
+    				rv = false;
+    			}
+            }
+            
+            return rv;
+        }
+
 
         /// <summary>
         /// This function checks if the source parts list is required.
@@ -160,16 +198,17 @@ namespace CaldsScriptGenerator
         /// <returns></returns>
         bool IsSrcPartsListRequired()
         {
-        	if (activateCheckBox.Checked     ||
-                mkcopyCheckBox.Checked       ||
-                chcalcopyCheckBox.Checked    ||
-                copyBenchCheckBox.Checked    ||
-                batchCaleditCheckBox.Checked ||
-                transferCheckBox.Checked     ||
-                bldImageCheckBox.Checked     ||
-                checkincopyCheckBox.Checked  ||
-                createClass2CheckBox.Checked ||
-                calplotCheckBox.Checked        )
+        	if (activateCheckBox.Checked        ||
+                mkcopyCheckBox.Checked          ||
+                chcalcopyCheckBox.Checked       ||
+                copyBenchCheckBox.Checked       ||
+                batchCaleditCheckBox.Checked    ||
+                transferCheckBox.Checked        ||
+                bldImageCheckBox.Checked        ||
+                checkinCopyRadioButton.Checked  ||
+                updateStatusRadioButton.Checked ||
+                createClass2CheckBox.Checked    ||
+                calplotCheckBox.Checked)
             {
                 return true;
             }
@@ -435,9 +474,10 @@ namespace CaldsScriptGenerator
         
         void checkinCopy(List<string> parts, TextWriter tw)
         {
-            if (checkincopyCheckBox.Checked)
+            if (checkinCopyRadioButton.Checked)
             {
-                string rel = "";
+                string rel = string.Empty;
+                string prod = String.Empty;
                 
                 // Remove any spaces from the log message and rev name strings.
                 string logMsg  = logMessageTextBox.Text.Replace(" ", "");
@@ -457,6 +497,11 @@ namespace CaldsScriptGenerator
                     rel = " Development_Release";
                 }
             	
+                if (productionIntentCheckBox.Checked)
+                {
+                    prod = " Production_Intent";
+                }
+
                 if (revNameTextBox.Text == "")
                 {
                     MessageBox.Show("Check In Copy Error: Please enter a Rev Name.");
@@ -466,8 +511,67 @@ namespace CaldsScriptGenerator
                     foreach (string part in parts)
                 	{
                         tw.WriteLine("Checkin_Copy copy=" + part.Trim() + " logmessage=" + logMsg +
-                                      " revname=" + revName + rel);
+                                      " revname=" + revName + rel + prod);
                 	}
+                }
+            }
+        }
+        
+        void updateStatus(List<string> parts, TextWriter tw)
+        {
+            if (updateStatusRadioButton.Checked)
+            {
+                bool dlsMissing = false;
+                string rel = String.Empty;
+                string prod = String.Empty;
+                
+                // Set the release string based on the release radio buttons.
+                if (valRelRadioButton.Checked) 
+                {
+                    rel = " Validation_Release";
+                }
+                else if (ppvRelRadioButton.Checked) 
+                {
+                    rel = " PPV_Release";
+                }
+                else 
+                {
+                    rel = " Development_Release";
+                }
+                
+                if (productionIntentCheckBox.Checked)
+                {
+                    prod = " Production_Intent";
+                }
+
+    
+                foreach (string part in parts)
+            	{
+                    // Set up a pattern to test for a cal that is an array (like "NAME(1/33 0)")
+                    string command = "Update_Status member=" + part.Trim();
+                    string pattern = @"(.+)\.([A-Za-z]{2})";
+                
+                    // Does the part include it's dls (12345678.AB)?
+                    if (Regex.Match(command, pattern).Success)
+                    {
+                        command = Regex.Replace(command, pattern, "$1 revision=$2");
+                        
+                         // Update_Status member=12080201 revision=AB PPV_Release Production_Intent
+                         tw.WriteLine(command + rel + prod);
+                    }
+                    else
+                    {
+                        dlsMissing = true;
+                    }
+                }
+                
+                if (dlsMissing == true)
+                {
+                    string msg = "Warning the Update Status command requires a DLS " +
+                        "(revision) extension for each part. It was missing on one " +
+                        "or more parts. The Update Status command was not written to " +
+                        "the process script for those parts.";
+                    MessageBox.Show(msg);
                 }
             }
         }
@@ -498,9 +602,8 @@ namespace CaldsScriptGenerator
         }
         
         /// <summary>
-        /// This function is called when the user clicks the button (with the 
-        /// three dots in it) next to the Parts List edit box. It allows the 
-        /// user to select a parts list file.
+        /// This function is called when the user clicks the Add Src Parts
+        /// button. It allows the user to select a parts list file.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -561,7 +664,7 @@ namespace CaldsScriptGenerator
                             partNumDestTextBox.AppendText(Environment.NewLine);
                         }
                     }
-                    UpdateStatusBar("Parts from file '" + Path.GetFileName(file) + "' were added to the source parts list");
+                    UpdateStatusBar("Parts from file '" + Path.GetFileName(file) + "' were added to the destination parts list");
             	}
             	else
             	{
@@ -683,22 +786,55 @@ namespace CaldsScriptGenerator
             aboutBox.Show();
         }
         
-        void PartNumbersTextBoxMouseDoubleClick(object sender, MouseEventArgs e)
+        
+        void PartNumSrcTextBoxDoubleClick(object sender, EventArgs e)
         {
-            textBox99.Clear();
+            partNumSrcTextBox.Clear();
         }
         
-        void CalVScrollBarScroll(object sender, ScrollEventArgs e)
+        
+        void PartNumDestTextBoxDoubleClick(object sender, EventArgs e)
         {
-            //int position;
-            
-            //position = CalVScrollBar.Value;
-
-            //SetScrollPos(calNameTextBox.Handle,1,calNameTextBox.Lines.Length-1,true);
-            //SendMessage(calNameTextBox.Handle,EM_LINESCROLL,0,calNameTextBox.Lines.Length-1);
-            
-            //SetScrollPos(calNameTextBox.Handle,1,position,true);
-            //SendMessage(calNameTextBox.Handle,EM_LINESCROLL,0,position);
+            partNumDestTextBox.Clear();
+        }
+        
+        void CalNameTextBoxDoubleClick(object sender, EventArgs e)
+        {
+            calNameTextBox.Clear();
+            calOffsetTextBox.Clear();
+            calValTextBox.Clear();
+        }
+        
+        void CheckinCopyRadioButtonClick(object sender, EventArgs e)
+        {
+            if (checkinCopyRadioButton.Checked)
+            {
+                checkinCopyRadioButton.Checked = false;
+                logMessageTextBox.Enabled = false;
+                revNameTextBox.Enabled = false;
+            }
+            else
+            {
+                checkinCopyRadioButton.Checked = true;
+                updateStatusRadioButton.Checked = false;
+                logMessageTextBox.Enabled = true;
+                revNameTextBox.Enabled = true;
+            }
+        }
+        
+        void UpdateStatusRadioButtonClick(object sender, EventArgs e)
+        {
+            if (updateStatusRadioButton.Checked)
+            {
+                updateStatusRadioButton.Checked = false;
+            }
+            else
+            {
+                updateStatusRadioButton.Checked = true;
+                checkinCopyRadioButton.Checked = false;
+                logMessageTextBox.Enabled = false;
+                revNameTextBox.Enabled = false;
+            }
         }
     }
 }
