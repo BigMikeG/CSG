@@ -115,7 +115,7 @@ namespace CaldsScriptGenerator
             // 
             this.tableLayoutPanel1.AutoSize = true;
             this.tableLayoutPanel1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.tableLayoutPanel1.ColumnCount = 6;
+            this.tableLayoutPanel1.ColumnCount = 5;
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
@@ -136,13 +136,13 @@ namespace CaldsScriptGenerator
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 2;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 540F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(686, 582);
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 650F));
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(689, 692);
             this.tableLayoutPanel1.TabIndex = 2;
             // 
             // label2
             // 
-            this.label2.Location = new System.Drawing.Point(582, 0);
+            this.label2.Location = new System.Drawing.Point(605, 0);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(39, 21);
             this.label2.TabIndex = 8;
@@ -151,7 +151,7 @@ namespace CaldsScriptGenerator
             // 
             // label1
             // 
-            this.label1.Location = new System.Drawing.Point(524, 0);
+            this.label1.Location = new System.Drawing.Point(547, 0);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(39, 21);
             this.label1.TabIndex = 6;
@@ -163,11 +163,11 @@ namespace CaldsScriptGenerator
             this.calValTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
                                     | System.Windows.Forms.AnchorStyles.Left) 
                                     | System.Windows.Forms.AnchorStyles.Right)));
-            this.calValTextBox.Location = new System.Drawing.Point(582, 45);
+            this.calValTextBox.Location = new System.Drawing.Point(605, 45);
             this.calValTextBox.Multiline = true;
             this.calValTextBox.Name = "calValTextBox";
             this.calValTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.calValTextBox.Size = new System.Drawing.Size(81, 534);
+            this.calValTextBox.Size = new System.Drawing.Size(81, 644);
             this.calValTextBox.TabIndex = 9;
             this.calValTextBox.WordWrap = false;
             // 
@@ -176,13 +176,14 @@ namespace CaldsScriptGenerator
             this.calOffsetTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
                                     | System.Windows.Forms.AnchorStyles.Left) 
                                     | System.Windows.Forms.AnchorStyles.Right)));
-            this.calOffsetTextBox.Location = new System.Drawing.Point(524, 45);
+            this.calOffsetTextBox.Location = new System.Drawing.Point(547, 45);
             this.calOffsetTextBox.Multiline = true;
             this.calOffsetTextBox.Name = "calOffsetTextBox";
             this.calOffsetTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.calOffsetTextBox.Size = new System.Drawing.Size(52, 534);
+            this.calOffsetTextBox.Size = new System.Drawing.Size(52, 644);
             this.calOffsetTextBox.TabIndex = 7;
             this.calOffsetTextBox.WordWrap = false;
+            this.calOffsetTextBox.DoubleClick += new System.EventHandler(this.CalOffsetTextBoxDoubleClick);
             // 
             // calNameTextBox
             // 
@@ -193,7 +194,7 @@ namespace CaldsScriptGenerator
             this.calNameTextBox.Multiline = true;
             this.calNameTextBox.Name = "calNameTextBox";
             this.calNameTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.calNameTextBox.Size = new System.Drawing.Size(303, 534);
+            this.calNameTextBox.Size = new System.Drawing.Size(326, 644);
             this.calNameTextBox.TabIndex = 5;
             this.calNameTextBox.WordWrap = false;
             this.calNameTextBox.DoubleClick += new System.EventHandler(this.CalNameTextBoxDoubleClick);
@@ -207,7 +208,7 @@ namespace CaldsScriptGenerator
             this.partNumSrcTextBox.Multiline = true;
             this.partNumSrcTextBox.Name = "partNumSrcTextBox";
             this.partNumSrcTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.partNumSrcTextBox.Size = new System.Drawing.Size(99, 534);
+            this.partNumSrcTextBox.Size = new System.Drawing.Size(99, 644);
             this.partNumSrcTextBox.TabIndex = 1;
             this.partNumSrcTextBox.WordWrap = false;
             this.partNumSrcTextBox.DoubleClick += new System.EventHandler(this.PartNumSrcTextBoxDoubleClick);
@@ -233,7 +234,7 @@ namespace CaldsScriptGenerator
             this.partNumDestTextBox.Multiline = true;
             this.partNumDestTextBox.Name = "partNumDestTextBox";
             this.partNumDestTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.partNumDestTextBox.Size = new System.Drawing.Size(101, 534);
+            this.partNumDestTextBox.Size = new System.Drawing.Size(101, 644);
             this.partNumDestTextBox.TabIndex = 3;
             this.partNumDestTextBox.WordWrap = false;
             this.partNumDestTextBox.DoubleClick += new System.EventHandler(this.PartNumDestTextBoxDoubleClick);

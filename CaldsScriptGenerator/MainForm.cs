@@ -20,9 +20,6 @@ using System.IO;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
 
-//using System.Runtime.InteropServices; // DllImport
-
-
 namespace CaldsScriptGenerator
 {
     /// <summary>
@@ -30,14 +27,6 @@ namespace CaldsScriptGenerator
     /// </summary>
     public partial class MainForm : Form
     {
-//        [DllImport("user32.dll")]
-//        static extern int SetScrollPos(IntPtr hWnd, int nBar, 
-//                                       int nPos, bool bRedraw);
-//        [DllImport("user32.dll")]
-//        static extern int SendMessage(IntPtr hWnd, int wMsg, 
-//                               int wParam, int lParam);
-//        const int EM_LINESCROLL = 0x00B6;
-        
         string ProcessScriptFile = "CalGenProcessScript.txt";
         string EngScriptFile     = "CalGenEngScript.txt";
         string PartsListFile     = "CalGenPartsList.txt";
@@ -105,11 +94,8 @@ namespace CaldsScriptGenerator
             	}
             }
             
-            // Ask the user to confirm the Checkin Copy or Update Status if selected.
-            if (ConfirmCheckinCopyUpdateStatus() == false)
-            {
-                return;
-            }
+            // Display a warning message if Checkin Copy or Update Status if selected.
+            //ConfirmCheckinCopyUpdateStatus();
             
             // Create a writer and open the file (using @ because it ignores escape sequences (such as "\")).
             TextWriter tw = new StreamWriter(outputFolderTextBox.Text + "\\" + ProcessScriptFile);
@@ -162,33 +148,19 @@ namespace CaldsScriptGenerator
             UpdateStatusBar("The Process Script file '" + ProcessScriptFile + "' was created.");
         }
 
-        bool ConfirmCheckinCopyUpdateStatus()
+        void ConfirmCheckinCopyUpdateStatus()
         {
-            bool rv = true;
             if (checkinCopyRadioButton.Checked || updateStatusRadioButton.Checked)
             {
     			// Initializes the variables to pass to the MessageBox.Show method.
                 string caption = "Confirmation Required";
     			string message = "You have selected either Checkin Copy or Update Status. " +
-    			    "Please click Yes to confirm or No to cancel.";
-    			MessageBoxButtons buttons = MessageBoxButtons.YesNo;
-    			DialogResult result;
+    			    "That's what you want, right?";
+    			MessageBoxButtons buttons = MessageBoxButtons.OK;
     
     			// Displays the MessageBox.
-    			result = MessageBox.Show(message, caption, buttons);
-    
-    			if (result == System.Windows.Forms.DialogResult.No)
-    			{
-                    // Clear the Checkin Copy and Update Status radio buttons (to make 
-                    // sure that neither is accidentally left enabled).
-                    checkinCopyRadioButton.Checked = false;
-                    updateStatusRadioButton.Checked = false;
-            
-    				rv = false;
-    			}
+    			MessageBox.Show(message, caption, buttons);
             }
-            
-            return rv;
         }
 
 
@@ -803,6 +775,33 @@ namespace CaldsScriptGenerator
             calNameTextBox.Clear();
             calOffsetTextBox.Clear();
             calValTextBox.Clear();
+        }
+        
+        void CalOffsetTextBoxDoubleClick(object sender, EventArgs e)
+        {
+            // Clear all data from the cal offset textbox.
+            calOffsetTextBox.Clear();
+            
+            // Split the textbox on the newline character so that we can get the 
+            // number of lines.
+            string [] lines = calNameTextBox.Text.Split('\n');
+
+            // Insert a zero for the offset for each calname.
+            for (int i = 0; i < lines.Length; i++)
+            {
+                // Insert a newline after every 0 except the last on.
+                // (inserting before each 0 except the first)
+                if (i > 0)
+                {
+                    calOffsetTextBox.Text += Environment.NewLine;
+                }
+                
+                // Insert a zero for each calname.
+                if (lines[i] != String.Empty)
+                {
+                    calOffsetTextBox.Text += "0";
+                }
+            }            
         }
         
         void CheckinCopyRadioButtonClick(object sender, EventArgs e)
