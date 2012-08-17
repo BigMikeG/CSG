@@ -95,7 +95,7 @@ namespace CaldsScriptGenerator
             }
             
             // Display a warning message if Checkin Copy or Update Status if selected.
-            //ConfirmCheckinCopyUpdateStatus();
+            ConfirmPpvOrValRelease();
             
             // Create a writer and open the file (using @ because it ignores escape sequences (such as "\")).
             TextWriter tw = new StreamWriter(outputFolderTextBox.Text + "\\" + ProcessScriptFile);
@@ -148,18 +148,60 @@ namespace CaldsScriptGenerator
             UpdateStatusBar("The Process Script file '" + ProcessScriptFile + "' was created.");
         }
 
-        void ConfirmCheckinCopyUpdateStatus()
+        void ConfirmPpvOrValRelease()
         {
-            if (checkinCopyRadioButton.Checked || updateStatusRadioButton.Checked)
+            string caption = "Warning";
+   			MessageBoxButtons buttons = MessageBoxButtons.OK;
+
+   			// Is the Check In Copy radio button is check?
+   			if (checkinCopyRadioButton.Checked)
             {
-    			// Initializes the variables to pass to the MessageBox.Show method.
-                string caption = "Confirmation Required";
-    			string message = "You have selected either Checkin Copy or Update Status. " +
-    			    "That's what you want, right?";
-    			MessageBoxButtons buttons = MessageBoxButtons.OK;
-    
-    			// Displays the MessageBox.
-    			MessageBox.Show(message, caption, buttons);
+                // Is the PPV Release radio button checked?
+   			    if (ppvRelRadioButton.Checked)
+                {
+        			string message = "You are about to Check In part(s) with PPV Release status.";
+        			MessageBox.Show(message, caption, buttons);
+                }
+                // Is the Validation Release radio button checked?
+   			    else if (valRelRadioButton.Checked)
+                {
+        			string message = "You are about to Check In part(s) with Validation Release status.";
+        			MessageBox.Show(message, caption, buttons);
+                }
+            }
+            // Is the Update Status radio button checked?
+            else if (updateStatusRadioButton.Checked && (revokeCheckBox.Checked == false))
+            {
+                if (revokeCheckBox.Checked)
+                {
+                    // Is the PPV Release radio button checked?
+       			    if (ppvRelRadioButton.Checked)
+                    {
+            			string message = "You are about to Revoke the PPV Release status.";
+            			MessageBox.Show(message, caption, buttons);
+                    }
+                    // Is the Validation Release radio button checked?
+       			    else if (valRelRadioButton.Checked)
+                    {
+            			string message = "You are about to Revoke Validation Release status.";
+            			MessageBox.Show(message, caption, buttons);
+                    }
+                }
+                else // Revoke not checked
+                {
+                    // Is the PPV Release radio button checked?
+       			    if (ppvRelRadioButton.Checked)
+                    {
+            			string message = "You are about to Update Status to PPV Release.";
+            			MessageBox.Show(message, caption, buttons);
+                    }
+                    // Is the Validation Release radio button checked?
+       			    else if (valRelRadioButton.Checked)
+                    {
+            			string message = "You are about to Update Status to Validation Release.";
+            			MessageBox.Show(message, caption, buttons);
+                    }
+                }
             }
         }
 
@@ -494,8 +536,15 @@ namespace CaldsScriptGenerator
             if (updateStatusRadioButton.Checked)
             {
                 bool dlsMissing = false;
+                string revoke = String.Empty;
                 string rel = String.Empty;
                 string prod = String.Empty;
+                
+                // Set the Revoke flage if the checkbox is checked.
+                if (revokeCheckBox.Checked)
+                {
+                    revoke = " revoke";
+                }
                 
                 // Set the release string based on the release radio buttons.
                 if (valRelRadioButton.Checked) 
@@ -529,7 +578,7 @@ namespace CaldsScriptGenerator
                         command = Regex.Replace(command, pattern, "$1 revision=$2");
                         
                          // Update_Status member=12080201 revision=AB PPV_Release Production_Intent
-                         tw.WriteLine(command + rel + prod);
+                         tw.WriteLine(command + revoke + rel + prod);
                     }
                     else
                     {
@@ -668,9 +717,9 @@ namespace CaldsScriptGenerator
                             string[] field = Regex.Split(line, "\t");
 
                             // Verify that the file is an Engineering script. It should have 4 columns of data.
-                            if (field.Length == 4) {
-                                valid = true; // indicate that a good record was found
-                                
+                            // If the first field is "sync" or "wq", skip it.
+                            if ((field.Length == 4) && !field[0].Equals("sync") && !field[0].Equals("wq"))
+                            {
                                 // Add the cal name to the textbox.
                                 calNameTextBox.AppendText(field[1]);
                                 calNameTextBox.AppendText(Environment.NewLine);
@@ -682,13 +731,17 @@ namespace CaldsScriptGenerator
                                 // Add the cal hex value to the textbox.
                                 calValTextBox.AppendText(field[3].PadLeft(2, '0'));
                                 calValTextBox.AppendText(Environment.NewLine);
+
+                                valid = true; // indicate that a good record was found
                             }
                         }
                         
-                        if (valid == true) {
+                        if (valid == true) 
+                        {
                             UpdateStatusBar("Cals from file '" + Path.GetFileName(file) + "' were added to the Cals list.");
                         }
-                        else {
+                        else 
+                        {
                             MessageBox.Show("Couldn't find any valid records. Is this an engineering script?");
                         }
                     }
@@ -808,16 +861,28 @@ namespace CaldsScriptGenerator
         {
             if (checkinCopyRadioButton.Checked)
             {
+                // Checkin Copy was clicked while it was set. So, disable it.
                 checkinCopyRadioButton.Checked = false;
+                revokeCheckBox.Enabled = false;
+                devRelRadioButton.Enabled = false;
+                ppvRelRadioButton.Enabled = false;
+                valRelRadioButton.Enabled = false;
                 logMessageTextBox.Enabled = false;
                 revNameTextBox.Enabled = false;
+                productionIntentCheckBox.Enabled = false;
             }
             else
             {
+                // Enable it.
                 checkinCopyRadioButton.Checked = true;
                 updateStatusRadioButton.Checked = false;
+                revokeCheckBox.Enabled = false;
+                devRelRadioButton.Enabled = true;
+                ppvRelRadioButton.Enabled = true;
+                valRelRadioButton.Enabled = true;
                 logMessageTextBox.Enabled = true;
                 revNameTextBox.Enabled = true;
+                productionIntentCheckBox.Enabled = true;
             }
         }
         
@@ -825,14 +890,26 @@ namespace CaldsScriptGenerator
         {
             if (updateStatusRadioButton.Checked)
             {
+                // Update Status was clicked while it was set. So, disable it.
                 updateStatusRadioButton.Checked = false;
+                revokeCheckBox.Enabled = false;
+                devRelRadioButton.Enabled = false;
+                ppvRelRadioButton.Enabled = false;
+                valRelRadioButton.Enabled = false;
+                productionIntentCheckBox.Enabled = false;
             }
             else
             {
+                // Enable it.
                 updateStatusRadioButton.Checked = true;
                 checkinCopyRadioButton.Checked = false;
+                revokeCheckBox.Enabled = true;
+                devRelRadioButton.Enabled = true;
+                ppvRelRadioButton.Enabled = true;
+                valRelRadioButton.Enabled = true;
                 logMessageTextBox.Enabled = false;
                 revNameTextBox.Enabled = false;
+                productionIntentCheckBox.Enabled = true;
             }
         }
     }
