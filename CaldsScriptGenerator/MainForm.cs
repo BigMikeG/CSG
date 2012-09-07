@@ -14,11 +14,13 @@
  */
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;         // Process
+using System.Diagnostics;              // Process
 using System.Drawing;
 using System.IO;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
+
+using MyHelp;                          // Browser
 
 namespace CaldsScriptGenerator
 {
@@ -52,14 +54,14 @@ namespace CaldsScriptGenerator
             // Verify that the output path exists.
             if (!Directory.Exists(outputFolderTextBox.Text)) 
             {
-                UpdateStatusBar("Output folder Does Not Exist! Please enter a valid output folder.");
+                UpdateStatusLabel("Output folder Does Not Exist! Please enter a valid output folder.");
                 return;
             }
         	
             // If the source parts list is needed, verify that it exists.
             if (IsSrcPartsListRequired() && (partNumSrcTextBox.Text.Length == 0)) 
             {
-                UpdateStatusBar("Enter at least 1 source part, please.");
+                UpdateStatusLabel("Enter at least 1 source part, please.");
                 return;
             }
             else 
@@ -78,7 +80,7 @@ namespace CaldsScriptGenerator
             // If the destination parts list is needed, verify that it exists.
             if (IsDestPartsListRequired() && (partNumDestTextBox.Text.Length == 0)) 
             {
-                UpdateStatusBar("Enter at least 1 destination part, please.");
+                UpdateStatusLabel("Enter at least 1 destination part, please.");
                 return;
             }
             else 
@@ -111,7 +113,8 @@ namespace CaldsScriptGenerator
             activatePart(partsSrc, tw);
             mkcopy(partsSrc, tw);
             
-            if (transferCheckBox.Checked || uploadCheckBox.Checked) {
+            if (transferCheckBox.Checked || uploadCheckBox.Checked) 
+            {
                 mkcopy(partsDst, tw);
             }
             
@@ -120,14 +123,15 @@ namespace CaldsScriptGenerator
             transfer(partsSrc, partsDst, tw);
             bldImage(partsSrc, tw);
             upload(partsSrc, partsDst, tw);
-            batchCaledit(tw);
+            //batchCaledit(tw);
             
-            // Checkin Copy, Update Status, Create Class 2, Calplot. 
+            // Batch Cal Edit, Checkin Copy, Update Status, Create Class 2, Calplot. 
             // If the Upload or Transfer checkboxes are checked, 
             // Then process the destination parts,
             // Else process the source parts.
             if (uploadCheckBox.Checked || transferCheckBox.Checked)
             {
+                batchCaledit(partsDst, tw);
                 checkinCopy(partsDst, tw);
                 updateStatus(partsDst, tw);
                 createClass2(partsDst, tw);
@@ -135,6 +139,7 @@ namespace CaldsScriptGenerator
             }
             else
             {
+                batchCaledit(partsSrc, tw);
                 checkinCopy(partsSrc, tw);
                 updateStatus(partsSrc, tw);
                 createClass2(partsSrc, tw);
@@ -145,7 +150,7 @@ namespace CaldsScriptGenerator
             tw.Close();
             
         	// Update the status text box.
-            UpdateStatusBar("The Process Script file '" + ProcessScriptFile + "' was created.");
+            UpdateStatusLabel("The Process Script file '" + ProcessScriptFile + "' was created.");
         }
 
         void ConfirmPpvOrValRelease()
@@ -321,27 +326,36 @@ namespace CaldsScriptGenerator
             }
         }
         
-        void batchCaledit(TextWriter tw)
+        void batchCaledit(List<string> parts, TextWriter tw)
         {
             if (batchCaleditCheckBox.Checked)
             {
                 // Write the Batch Cal Edit command to the Process Script.
                 tw.WriteLine("Batch_caledit file=" + PartsListFile + " script=" + EngScriptFile);
 
-                // Write the source parts list to a file.
-                if (unixFormatCheckBox.Checked)
+                // Create a writer and open the parts list file.
+                TextWriter twPart = new StreamWriter(outputFolderTextBox.Text + "\\" + PartsListFile);
+            	
+                // Set new line character to Unix style because Filezilla won't convert the new line using SFTP.
+                if (unixFormatCheckBox.Checked) 
                 {
-                    // Unix format.
-                    File.WriteAllText(outputFolderTextBox.Text + "\\" + PartsListFile, partNumSrcTextBox.Text.Replace("\r\n", "\n"));
+                    twPart.NewLine = "\n";
                 }
-                else
-                {
-                    File.WriteAllText(outputFolderTextBox.Text + "\\" + PartsListFile, partNumSrcTextBox.Text);
-                }
-                // Write the cal name, index, and value to the eng script file.
+        	
+                // Write each part in the list to the parts list file.
+            	foreach (string part in parts)
+            	{
+                    // The Regex.Replace is removing any extension.
+            	    twPart.WriteLine(Regex.Replace(part.Trim(), @"(\w)\.[a-zA-Z]{2}", "$1"));
+            	}
+
+                // close the parts list file.
+                twPart.Close();
+                
+            	// Write the cal name, index, and value to the eng script file.
                 if (writeCalsToFile() == false) 
                 {
-                    UpdateStatusBar("Eng script not written. Cal data not right.");
+                    UpdateStatusLabel("Eng script not written. Cal data not right.");
                     return;
                 }
             }
@@ -385,7 +399,7 @@ namespace CaldsScriptGenerator
                 tw.Close();
     
             	// Update the status text box.
-                UpdateStatusBar("The Engineering Script file '" + EngScriptFile + "' was created.");
+                UpdateStatusLabel("The Engineering Script file '" + EngScriptFile + "' was created.");
             }
             else
             {
@@ -652,7 +666,7 @@ namespace CaldsScriptGenerator
                             partNumSrcTextBox.AppendText(Environment.NewLine);
                         }
                     }
-                    UpdateStatusBar("Parts from file '" + Path.GetFileName(file) + "' were added to the source parts list.");
+                    UpdateStatusLabel("Parts from file '" + Path.GetFileName(file) + "' were added to the source parts list.");
             	}
             	else
             	{
@@ -685,7 +699,7 @@ namespace CaldsScriptGenerator
                             partNumDestTextBox.AppendText(Environment.NewLine);
                         }
                     }
-                    UpdateStatusBar("Parts from file '" + Path.GetFileName(file) + "' were added to the destination parts list");
+                    UpdateStatusLabel("Parts from file '" + Path.GetFileName(file) + "' were added to the destination parts list");
             	}
             	else
             	{
@@ -738,7 +752,7 @@ namespace CaldsScriptGenerator
                         
                         if (valid == true) 
                         {
-                            UpdateStatusBar("Cals from file '" + Path.GetFileName(file) + "' were added to the Cals list.");
+                            UpdateStatusLabel("Cals from file '" + Path.GetFileName(file) + "' were added to the Cals list.");
                         }
                         else 
                         {
@@ -762,45 +776,64 @@ namespace CaldsScriptGenerator
         }
         
         
-        // Tries to open the User's Guide in a web browser.
-        void UsersGuideToolStripMenuItem1Click(object sender, EventArgs e)
+//        // Tries to open the User's Guide in a web browser.
+//        void UsersGuideToolStripMenuItem1Click(object sender, EventArgs e)
+//        {
+//            bool error = false;
+//           	string[] browsers = { "chrome.exe", "firefox.exe", "iexplore.exe" };
+//            string site = "https://gmweb.gm.com/sites/CalSupport/Calds%20Script%20Generator";
+//            
+//            Process browser = new Process();
+//            browser.StartInfo.Arguments = site;
+//            
+//            // Look for a web browser.
+//            foreach (string b in browsers) 
+//            {
+//                error = false;
+//                browser.StartInfo.FileName  = b;
+//                try
+//                {
+//                    browser.Start();
+//                }
+//                catch
+//                {
+//                    error = true;
+//                }
+//                
+//                if (error == false) 
+//                {
+//                    // The browser was launched without error, break out of the loop.
+//                    break;
+//                }
+//            }
+//
+//            // Send a message to the status text box if we couldn't open a browser.
+//            if (error == true)
+//            {
+//                UpdateStatusBar(site);
+//            }
+//        }
+        
+        // Open the User's Guide in a web browser.
+        void UsersGuideToolStripMenuItemClick(object sender, EventArgs e)
         {
-            bool error = false;
-           	string[] browsers = { "chrome.exe", "firefox.exe", "iexplore.exe" };
-            string site = "https://gmweb.gm.com/sites/CalSupport/Calds%20Script%20Generator";
-            
-            Process browser = new Process();
-            browser.StartInfo.Arguments = site;
-            
-            // Look for a web browser.
-            foreach (string b in browsers) 
+            string site = "https://gmweb.gm.com/sites/CalSupport/Cal%20Compare";
+            if (Browser.Launch(site))
             {
-                error = false;
-                browser.StartInfo.FileName  = b;
-                try
-                {
-                    browser.Start();
-                }
-                catch
-                {
-                    error = true;
-                }
-                
-                if (error == false) 
-                {
-                    // The browser was launched without error, break out of the loop.
-                    break;
-                }
-            }
-
-            // Send a message to the status text box if we couldn't open a browser.
-            if (error == true)
-            {
-                UpdateStatusBar(site);
+                UpdateStatusLabel("Unable to launch '" + site + "'.");
             }
         }
         
-        void UpdateStatusBar(string s)
+        void CalSupportToolsSiteToolStripMenuItemClick(object sender, EventArgs e)
+        {
+            string site = "https://gmweb.gm.com/sites/CalSupport";
+            if (Browser.Launch(site))
+            {
+                UpdateStatusLabel("Unable to launch '" + site + "'.");
+            }
+        }
+
+        void UpdateStatusLabel(string s)
         {
             toolStripStatusLabel1.Text = DateTime.Now + ": " + s;
         }
@@ -912,5 +945,6 @@ namespace CaldsScriptGenerator
                 productionIntentCheckBox.Enabled = true;
             }
         }
+
     }
 }

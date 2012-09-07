@@ -97,12 +97,13 @@ namespace CaldsScriptGenerator
             this.valRelRadioButton = new System.Windows.Forms.RadioButton();
             this.unixFormatCheckBox = new System.Windows.Forms.CheckBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.revokeCheckBox = new System.Windows.Forms.CheckBox();
             this.checkinCopyRadioButton = new System.Windows.Forms.RadioButton();
             this.updateStatusRadioButton = new System.Windows.Forms.RadioButton();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.productionIntentCheckBox = new System.Windows.Forms.CheckBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.revokeCheckBox = new System.Windows.Forms.CheckBox();
+            this.calSupportToolsSiteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel3.SuspendLayout();
             this.menuStrip1.SuspendLayout();
@@ -498,6 +499,7 @@ namespace CaldsScriptGenerator
             // 
             this.helpToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
                                     this.usersGuideToolStripMenuItem1,
+                                    this.calSupportToolsSiteToolStripMenuItem,
                                     this.aboutToolStripMenuItem});
             this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
             this.helpToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
@@ -507,14 +509,14 @@ namespace CaldsScriptGenerator
             // 
             this.usersGuideToolStripMenuItem1.Name = "usersGuideToolStripMenuItem1";
             this.usersGuideToolStripMenuItem1.ShortcutKeys = System.Windows.Forms.Keys.F1;
-            this.usersGuideToolStripMenuItem1.Size = new System.Drawing.Size(158, 22);
+            this.usersGuideToolStripMenuItem1.Size = new System.Drawing.Size(190, 22);
             this.usersGuideToolStripMenuItem1.Text = "User\'s Guide";
-            this.usersGuideToolStripMenuItem1.Click += new System.EventHandler(this.UsersGuideToolStripMenuItem1Click);
+            this.usersGuideToolStripMenuItem1.Click += new System.EventHandler(this.UsersGuideToolStripMenuItemClick);
             // 
             // aboutToolStripMenuItem
             // 
             this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(158, 22);
+            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(190, 22);
             this.aboutToolStripMenuItem.Text = "About";
             this.aboutToolStripMenuItem.Click += new System.EventHandler(this.AboutToolStripMenuItemClick);
             // 
@@ -691,6 +693,17 @@ namespace CaldsScriptGenerator
             this.groupBox3.TabIndex = 39;
             this.groupBox3.TabStop = false;
             // 
+            // revokeCheckBox
+            // 
+            this.revokeCheckBox.AutoSize = true;
+            this.revokeCheckBox.Enabled = false;
+            this.revokeCheckBox.Location = new System.Drawing.Point(6, 16);
+            this.revokeCheckBox.Name = "revokeCheckBox";
+            this.revokeCheckBox.Size = new System.Drawing.Size(64, 17);
+            this.revokeCheckBox.TabIndex = 44;
+            this.revokeCheckBox.Text = "Revoke";
+            this.revokeCheckBox.UseVisualStyleBackColor = true;
+            // 
             // checkinCopyRadioButton
             // 
             this.checkinCopyRadioButton.AutoCheck = false;
@@ -751,16 +764,12 @@ namespace CaldsScriptGenerator
             this.groupBox1.TabIndex = 44;
             this.groupBox1.TabStop = false;
             // 
-            // revokeCheckBox
+            // calSupportToolsSiteToolStripMenuItem
             // 
-            this.revokeCheckBox.AutoSize = true;
-            this.revokeCheckBox.Enabled = false;
-            this.revokeCheckBox.Location = new System.Drawing.Point(6, 16);
-            this.revokeCheckBox.Name = "revokeCheckBox";
-            this.revokeCheckBox.Size = new System.Drawing.Size(64, 17);
-            this.revokeCheckBox.TabIndex = 44;
-            this.revokeCheckBox.Text = "Revoke";
-            this.revokeCheckBox.UseVisualStyleBackColor = true;
+            this.calSupportToolsSiteToolStripMenuItem.Name = "calSupportToolsSiteToolStripMenuItem";
+            this.calSupportToolsSiteToolStripMenuItem.Size = new System.Drawing.Size(190, 22);
+            this.calSupportToolsSiteToolStripMenuItem.Text = "Cal Support Tools Site";
+            this.calSupportToolsSiteToolStripMenuItem.Click += new System.EventHandler(this.CalSupportToolsSiteToolStripMenuItemClick);
             // 
             // MainForm
             // 
@@ -821,6 +830,7 @@ namespace CaldsScriptGenerator
             this.ResumeLayout(false);
             this.PerformLayout();
         }
+        private System.Windows.Forms.ToolStripMenuItem calSupportToolsSiteToolStripMenuItem;
         private System.Windows.Forms.CheckBox revokeCheckBox;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.CheckBox productionIntentCheckBox;
