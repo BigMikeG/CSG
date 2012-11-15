@@ -32,6 +32,10 @@ namespace CaldsScriptGenerator
         string ProcessScriptFile = "CalGenProcessScript.txt";
         string EngScriptFile     = "CalGenEngScript.txt";
         string PartsListFile     = "CalGenPartsList.txt";
+        int numNameLines = 0;
+        int numOffsetLines = 0;
+        int numValLines = 0;
+            
         
         public MainForm()
         {
@@ -123,7 +127,6 @@ namespace CaldsScriptGenerator
             transfer(partsSrc, partsDst, tw);
             bldImage(partsSrc, tw);
             upload(partsSrc, partsDst, tw);
-            //batchCaledit(tw);
             
             // Batch Cal Edit, Checkin Copy, Update Status, Create Class 2, Calplot. 
             // If the Upload or Transfer checkboxes are checked, 
@@ -378,7 +381,7 @@ namespace CaldsScriptGenerator
                 }
             	
                 // Write the cals to an engineering script.
-                for (int i = 0; i < calNameTextBox.Lines.Length; i++) 
+                for (int i = 0; i < numNameLines; i++) 
                 {
             	    string name   = calNameTextBox.Lines[i].Trim();
             	    string offset = calOffsetTextBox.Lines[i].Trim();
@@ -404,9 +407,9 @@ namespace CaldsScriptGenerator
             else
             {
                 string len = "(" 
-                    + calNameTextBox.Lines.Length.ToString() + ", "
-                    + calOffsetTextBox.Lines.Length.ToString() + ", "
-                    + calValTextBox.Lines.Length.ToString() + ")."; 
+                    + numNameLines.ToString() + ", "
+                    + numOffsetLines.ToString() + ", "
+                    + numValLines.ToString() + ")."; 
                 MessageBox.Show("There is something wrong with the cals. The number of items in each list do not match " + len);
             }
             
@@ -419,15 +422,42 @@ namespace CaldsScriptGenerator
         /// <returns></returns>
         bool DoCalTextBoxLengthsMatch()
         {
-            bool rv = false;
+            numNameLines = 0;
+            numOffsetLines = 0;
+            numValLines = 0;
             
-            if ((calNameTextBox.Lines.Length   == calOffsetTextBox.Lines.Length) &&
-                (calOffsetTextBox.Lines.Length == calValTextBox.Lines.Length))
+            for (int i = 0; i < calNameTextBox.Lines.Length; i++)
             {
-                rv = true;
+                if (!String.IsNullOrWhiteSpace(calNameTextBox.Lines[i]))
+                {
+                    numNameLines++;
+                }    
             }
             
-            return rv;
+            for (int i = 0; i < calOffsetTextBox.Lines.Length; i++)
+            {
+                if (!String.IsNullOrWhiteSpace(calOffsetTextBox.Lines[i]))
+                {
+                    numOffsetLines++;
+                }    
+            }
+
+            for (int i = 0; i < calValTextBox.Lines.Length; i++)
+            {
+                if (!String.IsNullOrWhiteSpace(calValTextBox.Lines[i]))
+                {
+                    numValLines++;
+                }    
+            }
+            
+            if ((numNameLines == numOffsetLines) && (numNameLines == numValLines))
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
         
         /// <summary>
@@ -504,8 +534,8 @@ namespace CaldsScriptGenerator
         {
             if (checkinCopyRadioButton.Checked)
             {
-                string rel = string.Empty;
-                string prod = String.Empty;
+                string rel = String.Empty;
+                //string prod = String.Empty;
                 
                 // Remove any spaces from the log message and rev name strings.
                 string logMsg  = logMessageTextBox.Text.Replace(" ", "");
@@ -525,10 +555,10 @@ namespace CaldsScriptGenerator
                     rel = " Development_Release";
                 }
             	
-                if (productionIntentCheckBox.Checked)
-                {
-                    prod = " Production_Intent";
-                }
+//                if (productionIntentCheckBox.Checked)
+//                {
+//                    prod = " Production_Intent";
+//                }
 
                 if (revNameTextBox.Text == "")
                 {
@@ -539,7 +569,7 @@ namespace CaldsScriptGenerator
                     foreach (string part in parts)
                 	{
                         tw.WriteLine("Checkin_Copy copy=" + part.Trim() + " logmessage=" + logMsg +
-                                      " revname=" + revName + rel + prod);
+                                      " revname=" + revName + rel);
                 	}
                 }
             }
@@ -552,7 +582,7 @@ namespace CaldsScriptGenerator
                 bool dlsMissing = false;
                 string revoke = String.Empty;
                 string rel = String.Empty;
-                string prod = String.Empty;
+//                string prod = String.Empty;
                 
                 // Set the Revoke flage if the checkbox is checked.
                 if (revokeCheckBox.Checked)
@@ -574,10 +604,10 @@ namespace CaldsScriptGenerator
                     rel = " Development_Release";
                 }
                 
-                if (productionIntentCheckBox.Checked)
-                {
-                    prod = " Production_Intent";
-                }
+//                if (productionIntentCheckBox.Checked)
+//                {
+//                    prod = " Production_Intent";
+//                }
 
     
                 foreach (string part in parts)
@@ -592,7 +622,8 @@ namespace CaldsScriptGenerator
                         command = Regex.Replace(command, pattern, "$1 revision=$2");
                         
                          // Update_Status member=12080201 revision=AB PPV_Release Production_Intent
-                         tw.WriteLine(command + revoke + rel + prod);
+                         //tw.WriteLine(command + revoke + rel + prod);
+                         tw.WriteLine(command + revoke + rel);
                     }
                     else
                     {
@@ -775,49 +806,10 @@ namespace CaldsScriptGenerator
             }
         }
         
-        
-//        // Tries to open the User's Guide in a web browser.
-//        void UsersGuideToolStripMenuItem1Click(object sender, EventArgs e)
-//        {
-//            bool error = false;
-//           	string[] browsers = { "chrome.exe", "firefox.exe", "iexplore.exe" };
-//            string site = "https://gmweb.gm.com/sites/CalSupport/Calds%20Script%20Generator";
-//            
-//            Process browser = new Process();
-//            browser.StartInfo.Arguments = site;
-//            
-//            // Look for a web browser.
-//            foreach (string b in browsers) 
-//            {
-//                error = false;
-//                browser.StartInfo.FileName  = b;
-//                try
-//                {
-//                    browser.Start();
-//                }
-//                catch
-//                {
-//                    error = true;
-//                }
-//                
-//                if (error == false) 
-//                {
-//                    // The browser was launched without error, break out of the loop.
-//                    break;
-//                }
-//            }
-//
-//            // Send a message to the status text box if we couldn't open a browser.
-//            if (error == true)
-//            {
-//                UpdateStatusBar(site);
-//            }
-//        }
-        
         // Open the User's Guide in a web browser.
         void UsersGuideToolStripMenuItemClick(object sender, EventArgs e)
         {
-            string site = "https://gmweb.gm.com/sites/CalSupport/Cal%20Compare";
+            string site = "https://gmweb.gm.com/sites/CalSupport/Calds%20Script%20Generator";
             if (Browser.Launch(site))
             {
                 UpdateStatusLabel("Unable to launch '" + site + "'.");
@@ -844,52 +836,84 @@ namespace CaldsScriptGenerator
             aboutBox.Show();
         }
         
-        
-        void PartNumSrcTextBoxDoubleClick(object sender, EventArgs e)
+        void SrcClearButtonClick(object sender, EventArgs e)
         {
             partNumSrcTextBox.Clear();
         }
         
-        
-        void PartNumDestTextBoxDoubleClick(object sender, EventArgs e)
+        void ClrDstButtonClick(object sender, EventArgs e)
         {
             partNumDestTextBox.Clear();
         }
         
-        void CalNameTextBoxDoubleClick(object sender, EventArgs e)
+        void ClearCalsButtonClick(object sender, EventArgs e)
         {
             calNameTextBox.Clear();
             calOffsetTextBox.Clear();
             calValTextBox.Clear();
         }
-        
+
         void CalOffsetTextBoxDoubleClick(object sender, EventArgs e)
         {
+            CalOffset();
+        }
+       
+        void CalOffset()
+        {
+            string line = String.Empty;
+            string lastLine = String.Empty;
+            int arrayIndex = 0;
+            
             // Clear all data from the cal offset textbox.
             calOffsetTextBox.Clear();
             
-            // Split the textbox on the newline character so that we can get the 
-            // number of lines.
+            // Split the Cal Name textbox on the newline character so that we 
+            // can get the number of lines.
             string [] lines = calNameTextBox.Text.Split('\n');
 
             // Insert a zero for the offset for each calname.
             for (int i = 0; i < lines.Length; i++)
             {
-                // Insert a newline after every 0 except the last on.
-                // (inserting before each 0 except the first)
-                if (i > 0)
+                // Remove leading and trailing whitespace from the line.
+                line = lines[i].Trim();
+                
+                // If the string is not empty, insert a zero offset for the calname.
+                if (!String.IsNullOrEmpty(line))
                 {
+                    // Is the cal an array (same calname as the last)?
+                    if (line.Equals(lastLine))
+                    {
+                        // Increment the index and set the offset to the index.
+                        arrayIndex++;
+                        calOffsetTextBox.Text += arrayIndex.ToString();
+                    }
+                    else
+                    {
+                        // Not an array. Append a zero to the offset textbox and 
+                        // reset the index.
+                        calOffsetTextBox.Text += "0";
+                        arrayIndex = 0;
+                    }
+                    
+                    // Add a New Line character after each offset value.
                     calOffsetTextBox.Text += Environment.NewLine;
                 }
                 
-                // Insert a zero for each calname.
-                if (lines[i] != String.Empty)
-                {
-                    calOffsetTextBox.Text += "0";
-                }
+                // Save the last line for the next iteration.
+                lastLine = line;
             }            
         }
-        
+       
+        void AutoFillCheckBoxCheckedChanged(object sender, EventArgs e)
+        {
+            CalOffset();
+        }
+
+        /// <summary>
+        /// This function is called when the Check-In Copy radio button is clicked.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         void CheckinCopyRadioButtonClick(object sender, EventArgs e)
         {
             if (checkinCopyRadioButton.Checked)
@@ -902,7 +926,7 @@ namespace CaldsScriptGenerator
                 valRelRadioButton.Enabled = false;
                 logMessageTextBox.Enabled = false;
                 revNameTextBox.Enabled = false;
-                productionIntentCheckBox.Enabled = false;
+                //productionIntentCheckBox.Enabled = false;
             }
             else
             {
@@ -915,10 +939,15 @@ namespace CaldsScriptGenerator
                 valRelRadioButton.Enabled = true;
                 logMessageTextBox.Enabled = true;
                 revNameTextBox.Enabled = true;
-                productionIntentCheckBox.Enabled = true;
+                //productionIntentCheckBox.Enabled = true;
             }
         }
         
+        /// <summary>
+        /// This function is called when the Update Status radio button is clicked.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         void UpdateStatusRadioButtonClick(object sender, EventArgs e)
         {
             if (updateStatusRadioButton.Checked)
@@ -929,7 +958,7 @@ namespace CaldsScriptGenerator
                 devRelRadioButton.Enabled = false;
                 ppvRelRadioButton.Enabled = false;
                 valRelRadioButton.Enabled = false;
-                productionIntentCheckBox.Enabled = false;
+                //productionIntentCheckBox.Enabled = false;
             }
             else
             {
@@ -942,9 +971,60 @@ namespace CaldsScriptGenerator
                 valRelRadioButton.Enabled = true;
                 logMessageTextBox.Enabled = false;
                 revNameTextBox.Enabled = false;
-                productionIntentCheckBox.Enabled = true;
+                //productionIntentCheckBox.Enabled = true;
             }
         }
+        
+        void CalNameTextBoxTextChanged(object sender, EventArgs e)
+        {
+            CalEditWarning();
+            
+            if (autoFillCheckBox.Checked)
+            {
+                CalOffset();
+            }
+        }
+        
+        void BatchCaleditCheckBoxCheckedChanged(object sender, EventArgs e)
+        {
+            CalEditWarning();
+        }
 
+        /// <summary>
+        /// This function gives a warning by setting the background color of the
+        /// Batch Cal Edit checkbox to yellow if there is something typed in the
+        /// Cal Name text box and the batch cal edit checkbox is not checked. Or
+        /// the box is checked but the cal name is empty.
+        /// </summary>
+        void CalEditWarning()
+        {
+            // Is text box empty.
+            if (String.IsNullOrWhiteSpace(calNameTextBox.Text))
+            {
+                if (batchCaleditCheckBox.Checked)
+                {
+                    // Warning: No cal entered but Batch Cal Edit is checked.
+                    batchCaleditCheckBox.BackColor = Color.Yellow;
+                }
+                else
+                {
+                    // OK: No cal entered and Batch Cal Edit is not checked.
+                    batchCaleditCheckBox.BackColor = DefaultBackColor;
+                }
+            }
+            else // text box has something in it besides whitespace.
+            {
+                if (batchCaleditCheckBox.Checked)
+                {
+                    // OK: Batch Cal Edit checked and cal entered.
+                    batchCaleditCheckBox.BackColor = DefaultBackColor;
+                }
+                else
+                {
+                    // Warning: Batch Cal Edit not checked and cal entered.
+                    batchCaleditCheckBox.BackColor = Color.Yellow;
+                }
+            }
+        }
     }
 }

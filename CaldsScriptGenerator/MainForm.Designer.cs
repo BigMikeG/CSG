@@ -36,18 +36,30 @@ namespace CaldsScriptGenerator
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
             this.calValTextBox = new System.Windows.Forms.TextBox();
             this.calOffsetTextBox = new System.Windows.Forms.TextBox();
             this.calNameTextBox = new System.Windows.Forms.TextBox();
             this.partNumSrcTextBox = new System.Windows.Forms.TextBox();
-            this.partsListDestButton = new System.Windows.Forms.Button();
             this.partNumDestTextBox = new System.Windows.Forms.TextBox();
-            this.partsListOpenButton = new System.Windows.Forms.Button();
+            this.offsetGroupBox = new System.Windows.Forms.GroupBox();
+            this.autoFillCheckBox = new System.Windows.Forms.CheckBox();
+            this.valueGroupBox = new System.Windows.Forms.GroupBox();
+            this.engRadioButton = new System.Windows.Forms.RadioButton();
+            this.hexRadioButton = new System.Windows.Forms.RadioButton();
+            this.calGroupBox = new System.Windows.Forms.GroupBox();
+            this.singleRadioButton = new System.Windows.Forms.RadioButton();
+            this.normalRadioButton = new System.Windows.Forms.RadioButton();
+            this.clearCalsButton = new System.Windows.Forms.Button();
             this.engScriptOpenButton = new System.Windows.Forms.Button();
+            this.srcPartsGroupBox = new System.Windows.Forms.GroupBox();
+            this.srcClearButton = new System.Windows.Forms.Button();
+            this.partsListOpenButton = new System.Windows.Forms.Button();
+            this.dstGroupBox = new System.Windows.Forms.GroupBox();
+            this.clrDstButton = new System.Windows.Forms.Button();
+            this.partsListDestButton = new System.Windows.Forms.Button();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.mkcopyCheckBox = new System.Windows.Forms.CheckBox();
             this.batchCaleditCheckBox = new System.Windows.Forms.CheckBox();
@@ -76,6 +88,7 @@ namespace CaldsScriptGenerator
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.usersGuideToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.calSupportToolsSiteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
@@ -101,10 +114,14 @@ namespace CaldsScriptGenerator
             this.checkinCopyRadioButton = new System.Windows.Forms.RadioButton();
             this.updateStatusRadioButton = new System.Windows.Forms.RadioButton();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.productionIntentCheckBox = new System.Windows.Forms.CheckBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.calSupportToolsSiteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.tableLayoutPanel1.SuspendLayout();
+            this.offsetGroupBox.SuspendLayout();
+            this.valueGroupBox.SuspendLayout();
+            this.calGroupBox.SuspendLayout();
+            this.srcPartsGroupBox.SuspendLayout();
+            this.dstGroupBox.SuspendLayout();
             this.tableLayoutPanel3.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
@@ -123,52 +140,35 @@ namespace CaldsScriptGenerator
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-            this.tableLayoutPanel1.Controls.Add(this.label2, 4, 0);
-            this.tableLayoutPanel1.Controls.Add(this.label1, 3, 0);
             this.tableLayoutPanel1.Controls.Add(this.calValTextBox, 4, 1);
             this.tableLayoutPanel1.Controls.Add(this.calOffsetTextBox, 3, 1);
             this.tableLayoutPanel1.Controls.Add(this.calNameTextBox, 2, 1);
             this.tableLayoutPanel1.Controls.Add(this.partNumSrcTextBox, 0, 1);
-            this.tableLayoutPanel1.Controls.Add(this.partsListDestButton, 1, 0);
             this.tableLayoutPanel1.Controls.Add(this.partNumDestTextBox, 1, 1);
-            this.tableLayoutPanel1.Controls.Add(this.partsListOpenButton, 0, 0);
-            this.tableLayoutPanel1.Controls.Add(this.engScriptOpenButton, 2, 0);
+            this.tableLayoutPanel1.Controls.Add(this.offsetGroupBox, 3, 0);
+            this.tableLayoutPanel1.Controls.Add(this.valueGroupBox, 4, 0);
+            this.tableLayoutPanel1.Controls.Add(this.calGroupBox, 2, 0);
+            this.tableLayoutPanel1.Controls.Add(this.srcPartsGroupBox, 0, 0);
+            this.tableLayoutPanel1.Controls.Add(this.dstGroupBox, 1, 0);
             this.tableLayoutPanel1.Location = new System.Drawing.Point(13, 71);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 2;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 670F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(689, 712);
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 640F));
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(803, 711);
             this.tableLayoutPanel1.TabIndex = 2;
-            // 
-            // label2
-            // 
-            this.label2.Location = new System.Drawing.Point(605, 0);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(39, 21);
-            this.label2.TabIndex = 8;
-            this.label2.Text = "Value";
-            this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // label1
-            // 
-            this.label1.Location = new System.Drawing.Point(547, 0);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(39, 21);
-            this.label1.TabIndex = 6;
-            this.label1.Text = "Offset";
-            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // calValTextBox
             // 
             this.calValTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
                                     | System.Windows.Forms.AnchorStyles.Left) 
                                     | System.Windows.Forms.AnchorStyles.Right)));
-            this.calValTextBox.Location = new System.Drawing.Point(605, 45);
+            this.calValTextBox.Location = new System.Drawing.Point(718, 74);
+            this.calValTextBox.MaxLength = 2147483647;
             this.calValTextBox.Multiline = true;
             this.calValTextBox.Name = "calValTextBox";
             this.calValTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.calValTextBox.Size = new System.Drawing.Size(81, 664);
+            this.calValTextBox.Size = new System.Drawing.Size(82, 634);
             this.calValTextBox.TabIndex = 9;
             this.calValTextBox.WordWrap = false;
             // 
@@ -177,11 +177,12 @@ namespace CaldsScriptGenerator
             this.calOffsetTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
                                     | System.Windows.Forms.AnchorStyles.Left) 
                                     | System.Windows.Forms.AnchorStyles.Right)));
-            this.calOffsetTextBox.Location = new System.Drawing.Point(547, 45);
+            this.calOffsetTextBox.Location = new System.Drawing.Point(635, 74);
+            this.calOffsetTextBox.MaxLength = 2147483647;
             this.calOffsetTextBox.Multiline = true;
             this.calOffsetTextBox.Name = "calOffsetTextBox";
             this.calOffsetTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.calOffsetTextBox.Size = new System.Drawing.Size(52, 664);
+            this.calOffsetTextBox.Size = new System.Drawing.Size(77, 634);
             this.calOffsetTextBox.TabIndex = 7;
             this.calOffsetTextBox.WordWrap = false;
             this.calOffsetTextBox.DoubleClick += new System.EventHandler(this.CalOffsetTextBoxDoubleClick);
@@ -191,83 +192,220 @@ namespace CaldsScriptGenerator
             this.calNameTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
                                     | System.Windows.Forms.AnchorStyles.Left) 
                                     | System.Windows.Forms.AnchorStyles.Right)));
-            this.calNameTextBox.Location = new System.Drawing.Point(215, 45);
+            this.calNameTextBox.Location = new System.Drawing.Point(227, 74);
+            this.calNameTextBox.MaxLength = 2147483647;
             this.calNameTextBox.Multiline = true;
             this.calNameTextBox.Name = "calNameTextBox";
             this.calNameTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.calNameTextBox.Size = new System.Drawing.Size(326, 664);
+            this.calNameTextBox.Size = new System.Drawing.Size(402, 634);
             this.calNameTextBox.TabIndex = 5;
             this.calNameTextBox.WordWrap = false;
-            this.calNameTextBox.DoubleClick += new System.EventHandler(this.CalNameTextBoxDoubleClick);
+            this.calNameTextBox.TextChanged += new System.EventHandler(this.CalNameTextBoxTextChanged);
             // 
             // partNumSrcTextBox
             // 
             this.partNumSrcTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
                                     | System.Windows.Forms.AnchorStyles.Left) 
                                     | System.Windows.Forms.AnchorStyles.Right)));
-            this.partNumSrcTextBox.Location = new System.Drawing.Point(3, 45);
+            this.partNumSrcTextBox.Location = new System.Drawing.Point(3, 74);
             this.partNumSrcTextBox.Multiline = true;
             this.partNumSrcTextBox.Name = "partNumSrcTextBox";
             this.partNumSrcTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.partNumSrcTextBox.Size = new System.Drawing.Size(99, 664);
+            this.partNumSrcTextBox.Size = new System.Drawing.Size(105, 634);
             this.partNumSrcTextBox.TabIndex = 1;
             this.partNumSrcTextBox.WordWrap = false;
-            this.partNumSrcTextBox.DoubleClick += new System.EventHandler(this.PartNumSrcTextBoxDoubleClick);
-            // 
-            // partsListDestButton
-            // 
-            this.partsListDestButton.AutoSize = true;
-            this.partsListDestButton.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.partsListDestButton.Location = new System.Drawing.Point(108, 3);
-            this.partsListDestButton.Name = "partsListDestButton";
-            this.partsListDestButton.Size = new System.Drawing.Size(55, 36);
-            this.partsListDestButton.TabIndex = 2;
-            this.partsListDestButton.Text = "Add Dst\r\nParts";
-            this.partsListDestButton.UseVisualStyleBackColor = true;
-            this.partsListDestButton.Click += new System.EventHandler(this.PartsListDestButtonClick);
             // 
             // partNumDestTextBox
             // 
             this.partNumDestTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
                                     | System.Windows.Forms.AnchorStyles.Left) 
                                     | System.Windows.Forms.AnchorStyles.Right)));
-            this.partNumDestTextBox.Location = new System.Drawing.Point(108, 45);
+            this.partNumDestTextBox.Location = new System.Drawing.Point(114, 74);
             this.partNumDestTextBox.Multiline = true;
             this.partNumDestTextBox.Name = "partNumDestTextBox";
             this.partNumDestTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.partNumDestTextBox.Size = new System.Drawing.Size(101, 664);
+            this.partNumDestTextBox.Size = new System.Drawing.Size(107, 634);
             this.partNumDestTextBox.TabIndex = 3;
             this.partNumDestTextBox.WordWrap = false;
-            this.partNumDestTextBox.DoubleClick += new System.EventHandler(this.PartNumDestTextBoxDoubleClick);
             // 
-            // partsListOpenButton
+            // offsetGroupBox
             // 
-            this.partsListOpenButton.AutoSize = true;
-            this.partsListOpenButton.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.partsListOpenButton.Location = new System.Drawing.Point(3, 3);
-            this.partsListOpenButton.Name = "partsListOpenButton";
-            this.partsListOpenButton.Size = new System.Drawing.Size(58, 36);
-            this.partsListOpenButton.TabIndex = 0;
-            this.partsListOpenButton.Text = "Add Src \r\nParts";
-            this.partsListOpenButton.UseVisualStyleBackColor = true;
-            this.partsListOpenButton.Click += new System.EventHandler(this.PartsListSrcButtonClick);
+            this.offsetGroupBox.Controls.Add(this.autoFillCheckBox);
+            this.offsetGroupBox.Location = new System.Drawing.Point(635, 3);
+            this.offsetGroupBox.Name = "offsetGroupBox";
+            this.offsetGroupBox.Size = new System.Drawing.Size(77, 65);
+            this.offsetGroupBox.TabIndex = 6;
+            this.offsetGroupBox.TabStop = false;
+            this.offsetGroupBox.Text = "Offset";
+            // 
+            // autoFillCheckBox
+            // 
+            this.autoFillCheckBox.Location = new System.Drawing.Point(7, 20);
+            this.autoFillCheckBox.Name = "autoFillCheckBox";
+            this.autoFillCheckBox.Size = new System.Drawing.Size(63, 24);
+            this.autoFillCheckBox.TabIndex = 0;
+            this.autoFillCheckBox.Text = "Auto Fill";
+            this.autoFillCheckBox.UseVisualStyleBackColor = true;
+            this.autoFillCheckBox.CheckedChanged += new System.EventHandler(this.AutoFillCheckBoxCheckedChanged);
+            // 
+            // valueGroupBox
+            // 
+            this.valueGroupBox.Controls.Add(this.engRadioButton);
+            this.valueGroupBox.Controls.Add(this.hexRadioButton);
+            this.valueGroupBox.Location = new System.Drawing.Point(718, 3);
+            this.valueGroupBox.Name = "valueGroupBox";
+            this.valueGroupBox.Size = new System.Drawing.Size(82, 65);
+            this.valueGroupBox.TabIndex = 8;
+            this.valueGroupBox.TabStop = false;
+            this.valueGroupBox.Text = "Value";
+            // 
+            // engRadioButton
+            // 
+            this.engRadioButton.Enabled = false;
+            this.engRadioButton.Location = new System.Drawing.Point(6, 37);
+            this.engRadioButton.Name = "engRadioButton";
+            this.engRadioButton.Size = new System.Drawing.Size(59, 17);
+            this.engRadioButton.TabIndex = 1;
+            this.engRadioButton.Text = "Eng";
+            this.engRadioButton.UseVisualStyleBackColor = true;
+            // 
+            // hexRadioButton
+            // 
+            this.hexRadioButton.Checked = true;
+            this.hexRadioButton.Location = new System.Drawing.Point(6, 14);
+            this.hexRadioButton.Name = "hexRadioButton";
+            this.hexRadioButton.Size = new System.Drawing.Size(59, 17);
+            this.hexRadioButton.TabIndex = 0;
+            this.hexRadioButton.TabStop = true;
+            this.hexRadioButton.Text = "Hex";
+            this.hexRadioButton.UseVisualStyleBackColor = true;
+            // 
+            // calGroupBox
+            // 
+            this.calGroupBox.Controls.Add(this.singleRadioButton);
+            this.calGroupBox.Controls.Add(this.normalRadioButton);
+            this.calGroupBox.Controls.Add(this.clearCalsButton);
+            this.calGroupBox.Controls.Add(this.engScriptOpenButton);
+            this.calGroupBox.Location = new System.Drawing.Point(227, 3);
+            this.calGroupBox.Name = "calGroupBox";
+            this.calGroupBox.Size = new System.Drawing.Size(402, 65);
+            this.calGroupBox.TabIndex = 4;
+            this.calGroupBox.TabStop = false;
+            this.calGroupBox.Text = "Calibrations";
+            // 
+            // singleRadioButton
+            // 
+            this.singleRadioButton.Enabled = false;
+            this.singleRadioButton.Location = new System.Drawing.Point(184, 16);
+            this.singleRadioButton.Name = "singleRadioButton";
+            this.singleRadioButton.Size = new System.Drawing.Size(73, 18);
+            this.singleRadioButton.TabIndex = 3;
+            this.singleRadioButton.Text = "Single";
+            this.singleRadioButton.UseVisualStyleBackColor = true;
+            // 
+            // normalRadioButton
+            // 
+            this.normalRadioButton.Checked = true;
+            this.normalRadioButton.Location = new System.Drawing.Point(117, 16);
+            this.normalRadioButton.Name = "normalRadioButton";
+            this.normalRadioButton.Size = new System.Drawing.Size(73, 18);
+            this.normalRadioButton.TabIndex = 2;
+            this.normalRadioButton.TabStop = true;
+            this.normalRadioButton.Text = "Normal";
+            this.normalRadioButton.UseVisualStyleBackColor = true;
+            // 
+            // clearCalsButton
+            // 
+            this.clearCalsButton.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.clearCalsButton.Location = new System.Drawing.Point(52, 14);
+            this.clearCalsButton.Name = "clearCalsButton";
+            this.clearCalsButton.Size = new System.Drawing.Size(40, 20);
+            this.clearCalsButton.TabIndex = 1;
+            this.clearCalsButton.Text = "Clear";
+            this.clearCalsButton.UseVisualStyleBackColor = true;
+            this.clearCalsButton.Click += new System.EventHandler(this.ClearCalsButtonClick);
             // 
             // engScriptOpenButton
             // 
-            this.engScriptOpenButton.AutoSize = true;
             this.engScriptOpenButton.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.engScriptOpenButton.Location = new System.Drawing.Point(215, 3);
+            this.engScriptOpenButton.Location = new System.Drawing.Point(6, 14);
             this.engScriptOpenButton.Name = "engScriptOpenButton";
-            this.engScriptOpenButton.Size = new System.Drawing.Size(59, 23);
-            this.engScriptOpenButton.TabIndex = 4;
-            this.engScriptOpenButton.Text = "Add Cals";
+            this.engScriptOpenButton.Size = new System.Drawing.Size(40, 20);
+            this.engScriptOpenButton.TabIndex = 0;
+            this.engScriptOpenButton.Text = "Add";
             this.engScriptOpenButton.UseVisualStyleBackColor = true;
             this.engScriptOpenButton.Click += new System.EventHandler(this.EngScriptOpenButtonClick);
+            // 
+            // srcPartsGroupBox
+            // 
+            this.srcPartsGroupBox.Controls.Add(this.srcClearButton);
+            this.srcPartsGroupBox.Controls.Add(this.partsListOpenButton);
+            this.srcPartsGroupBox.Location = new System.Drawing.Point(3, 3);
+            this.srcPartsGroupBox.Name = "srcPartsGroupBox";
+            this.srcPartsGroupBox.Size = new System.Drawing.Size(105, 65);
+            this.srcPartsGroupBox.TabIndex = 0;
+            this.srcPartsGroupBox.TabStop = false;
+            this.srcPartsGroupBox.Text = "Source Parts";
+            // 
+            // srcClearButton
+            // 
+            this.srcClearButton.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.srcClearButton.Location = new System.Drawing.Point(52, 14);
+            this.srcClearButton.Name = "srcClearButton";
+            this.srcClearButton.Size = new System.Drawing.Size(40, 20);
+            this.srcClearButton.TabIndex = 1;
+            this.srcClearButton.Text = "Clear";
+            this.srcClearButton.UseVisualStyleBackColor = true;
+            this.srcClearButton.Click += new System.EventHandler(this.SrcClearButtonClick);
+            // 
+            // partsListOpenButton
+            // 
+            this.partsListOpenButton.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.partsListOpenButton.Location = new System.Drawing.Point(6, 14);
+            this.partsListOpenButton.Name = "partsListOpenButton";
+            this.partsListOpenButton.Size = new System.Drawing.Size(40, 20);
+            this.partsListOpenButton.TabIndex = 0;
+            this.partsListOpenButton.Text = "Add";
+            this.partsListOpenButton.UseVisualStyleBackColor = true;
+            this.partsListOpenButton.Click += new System.EventHandler(this.PartsListSrcButtonClick);
+            // 
+            // dstGroupBox
+            // 
+            this.dstGroupBox.Controls.Add(this.clrDstButton);
+            this.dstGroupBox.Controls.Add(this.partsListDestButton);
+            this.dstGroupBox.Location = new System.Drawing.Point(114, 3);
+            this.dstGroupBox.Name = "dstGroupBox";
+            this.dstGroupBox.Size = new System.Drawing.Size(107, 65);
+            this.dstGroupBox.TabIndex = 2;
+            this.dstGroupBox.TabStop = false;
+            this.dstGroupBox.Text = "Destination Parts";
+            // 
+            // clrDstButton
+            // 
+            this.clrDstButton.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.clrDstButton.Location = new System.Drawing.Point(52, 14);
+            this.clrDstButton.Name = "clrDstButton";
+            this.clrDstButton.Size = new System.Drawing.Size(40, 20);
+            this.clrDstButton.TabIndex = 1;
+            this.clrDstButton.Text = "Clear";
+            this.clrDstButton.UseVisualStyleBackColor = true;
+            this.clrDstButton.Click += new System.EventHandler(this.ClrDstButtonClick);
+            // 
+            // partsListDestButton
+            // 
+            this.partsListDestButton.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.partsListDestButton.Location = new System.Drawing.Point(6, 14);
+            this.partsListDestButton.Name = "partsListDestButton";
+            this.partsListDestButton.Size = new System.Drawing.Size(40, 20);
+            this.partsListDestButton.TabIndex = 0;
+            this.partsListDestButton.Text = "Add";
+            this.partsListDestButton.UseVisualStyleBackColor = true;
+            this.partsListDestButton.Click += new System.EventHandler(this.PartsListDestButtonClick);
             // 
             // mkcopyCheckBox
             // 
             this.mkcopyCheckBox.AutoSize = true;
-            this.mkcopyCheckBox.Location = new System.Drawing.Point(718, 206);
+            this.mkcopyCheckBox.Location = new System.Drawing.Point(827, 207);
             this.mkcopyCheckBox.Name = "mkcopyCheckBox";
             this.mkcopyCheckBox.Size = new System.Drawing.Size(80, 17);
             this.mkcopyCheckBox.TabIndex = 13;
@@ -277,69 +415,70 @@ namespace CaldsScriptGenerator
             // batchCaleditCheckBox
             // 
             this.batchCaleditCheckBox.AutoSize = true;
-            this.batchCaleditCheckBox.Location = new System.Drawing.Point(718, 370);
+            this.batchCaleditCheckBox.Location = new System.Drawing.Point(827, 371);
             this.batchCaleditCheckBox.Name = "batchCaleditCheckBox";
             this.batchCaleditCheckBox.Size = new System.Drawing.Size(93, 17);
             this.batchCaleditCheckBox.TabIndex = 21;
             this.batchCaleditCheckBox.Text = "Batch Cal Edit";
             this.batchCaleditCheckBox.UseVisualStyleBackColor = true;
+            this.batchCaleditCheckBox.CheckedChanged += new System.EventHandler(this.BatchCaleditCheckBoxCheckedChanged);
             // 
             // logMessageTextBox
             // 
             this.logMessageTextBox.Enabled = false;
-            this.logMessageTextBox.Location = new System.Drawing.Point(18, 211);
+            this.logMessageTextBox.Location = new System.Drawing.Point(18, 188);
             this.logMessageTextBox.Name = "logMessageTextBox";
             this.logMessageTextBox.Size = new System.Drawing.Size(100, 20);
-            this.logMessageTextBox.TabIndex = 26;
+            this.logMessageTextBox.TabIndex = 2;
             // 
             // revNameTextBox
             // 
             this.revNameTextBox.Enabled = false;
-            this.revNameTextBox.Location = new System.Drawing.Point(18, 237);
+            this.revNameTextBox.Location = new System.Drawing.Point(18, 214);
             this.revNameTextBox.Name = "revNameTextBox";
             this.revNameTextBox.Size = new System.Drawing.Size(100, 20);
-            this.revNameTextBox.TabIndex = 28;
+            this.revNameTextBox.TabIndex = 4;
             // 
             // createClass2CheckBox
             // 
             this.createClass2CheckBox.AutoSize = true;
-            this.createClass2CheckBox.Location = new System.Drawing.Point(718, 666);
+            this.createClass2CheckBox.Location = new System.Drawing.Point(827, 642);
             this.createClass2CheckBox.Name = "createClass2CheckBox";
             this.createClass2CheckBox.Size = new System.Drawing.Size(94, 17);
-            this.createClass2CheckBox.TabIndex = 30;
+            this.createClass2CheckBox.TabIndex = 23;
             this.createClass2CheckBox.Text = "Create Class 2";
             this.createClass2CheckBox.UseVisualStyleBackColor = true;
             // 
             // calplotCheckBox
             // 
             this.calplotCheckBox.AutoSize = true;
-            this.calplotCheckBox.Location = new System.Drawing.Point(718, 689);
+            this.calplotCheckBox.Location = new System.Drawing.Point(827, 665);
             this.calplotCheckBox.Name = "calplotCheckBox";
             this.calplotCheckBox.Size = new System.Drawing.Size(58, 17);
-            this.calplotCheckBox.TabIndex = 31;
+            this.calplotCheckBox.TabIndex = 24;
             this.calplotCheckBox.Text = "Calplot";
             this.calplotCheckBox.UseVisualStyleBackColor = true;
             // 
             // prefixTextBox
             // 
-            this.prefixTextBox.Location = new System.Drawing.Point(736, 712);
+            this.prefixTextBox.Location = new System.Drawing.Point(845, 688);
             this.prefixTextBox.Name = "prefixTextBox";
             this.prefixTextBox.Size = new System.Drawing.Size(100, 20);
-            this.prefixTextBox.TabIndex = 32;
+            this.prefixTextBox.TabIndex = 25;
             this.prefixTextBox.Text = "cp_";
             // 
             // extTextBox
             // 
-            this.extTextBox.Location = new System.Drawing.Point(736, 738);
+            this.extTextBox.Location = new System.Drawing.Point(845, 714);
             this.extTextBox.Name = "extTextBox";
             this.extTextBox.Size = new System.Drawing.Size(100, 20);
-            this.extTextBox.TabIndex = 34;
+            this.extTextBox.TabIndex = 27;
             this.extTextBox.Text = "txt";
             // 
             // activateCheckBox
             // 
             this.activateCheckBox.AutoSize = true;
-            this.activateCheckBox.Location = new System.Drawing.Point(718, 160);
+            this.activateCheckBox.Location = new System.Drawing.Point(827, 161);
             this.activateCheckBox.Name = "activateCheckBox";
             this.activateCheckBox.Size = new System.Drawing.Size(87, 17);
             this.activateCheckBox.TabIndex = 11;
@@ -349,7 +488,7 @@ namespace CaldsScriptGenerator
             // chcalcopyCheckBox
             // 
             this.chcalcopyCheckBox.AutoSize = true;
-            this.chcalcopyCheckBox.Location = new System.Drawing.Point(718, 229);
+            this.chcalcopyCheckBox.Location = new System.Drawing.Point(827, 230);
             this.chcalcopyCheckBox.Name = "chcalcopyCheckBox";
             this.chcalcopyCheckBox.Size = new System.Drawing.Size(108, 17);
             this.chcalcopyCheckBox.TabIndex = 14;
@@ -358,10 +497,10 @@ namespace CaldsScriptGenerator
             // 
             // goButton
             // 
-            this.goButton.Location = new System.Drawing.Point(881, 763);
+            this.goButton.Location = new System.Drawing.Point(990, 739);
             this.goButton.Name = "goButton";
             this.goButton.Size = new System.Drawing.Size(75, 23);
-            this.goButton.TabIndex = 37;
+            this.goButton.TabIndex = 30;
             this.goButton.Text = "Go";
             this.goButton.UseVisualStyleBackColor = true;
             this.goButton.Click += new System.EventHandler(this.GoButtonClick);
@@ -382,14 +521,14 @@ namespace CaldsScriptGenerator
             this.tableLayoutPanel3.RowCount = 1;
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel3.Size = new System.Drawing.Size(689, 29);
+            this.tableLayoutPanel3.Size = new System.Drawing.Size(799, 29);
             this.tableLayoutPanel3.TabIndex = 1;
             // 
             // outputFolderButton
             // 
             this.outputFolderButton.AutoSize = true;
             this.outputFolderButton.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.outputFolderButton.Location = new System.Drawing.Point(660, 3);
+            this.outputFolderButton.Location = new System.Drawing.Point(770, 3);
             this.outputFolderButton.Name = "outputFolderButton";
             this.outputFolderButton.Size = new System.Drawing.Size(26, 23);
             this.outputFolderButton.TabIndex = 2;
@@ -401,7 +540,7 @@ namespace CaldsScriptGenerator
             // 
             this.outputFolderTextBox.Location = new System.Drawing.Point(80, 3);
             this.outputFolderTextBox.Name = "outputFolderTextBox";
-            this.outputFolderTextBox.Size = new System.Drawing.Size(574, 20);
+            this.outputFolderTextBox.Size = new System.Drawing.Size(684, 20);
             this.outputFolderTextBox.TabIndex = 1;
             // 
             // outputFolderLabel
@@ -415,14 +554,14 @@ namespace CaldsScriptGenerator
             // 
             // chcalcopySwPartTextBox
             // 
-            this.chcalcopySwPartTextBox.Location = new System.Drawing.Point(736, 252);
+            this.chcalcopySwPartTextBox.Location = new System.Drawing.Point(845, 253);
             this.chcalcopySwPartTextBox.Name = "chcalcopySwPartTextBox";
             this.chcalcopySwPartTextBox.Size = new System.Drawing.Size(100, 20);
             this.chcalcopySwPartTextBox.TabIndex = 15;
             // 
             // swPartLabel
             // 
-            this.swPartLabel.Location = new System.Drawing.Point(842, 251);
+            this.swPartLabel.Location = new System.Drawing.Point(951, 252);
             this.swPartLabel.Name = "swPartLabel";
             this.swPartLabel.Size = new System.Drawing.Size(52, 21);
             this.swPartLabel.TabIndex = 16;
@@ -431,44 +570,44 @@ namespace CaldsScriptGenerator
             // 
             // logMessageLlabel
             // 
-            this.logMessageLlabel.Location = new System.Drawing.Point(124, 209);
+            this.logMessageLlabel.Location = new System.Drawing.Point(124, 186);
             this.logMessageLlabel.Name = "logMessageLlabel";
             this.logMessageLlabel.Size = new System.Drawing.Size(74, 23);
-            this.logMessageLlabel.TabIndex = 27;
+            this.logMessageLlabel.TabIndex = 3;
             this.logMessageLlabel.Text = "Log Message";
             this.logMessageLlabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // revNameLabel
             // 
-            this.revNameLabel.Location = new System.Drawing.Point(124, 235);
+            this.revNameLabel.Location = new System.Drawing.Point(124, 212);
             this.revNameLabel.Name = "revNameLabel";
             this.revNameLabel.Size = new System.Drawing.Size(74, 23);
-            this.revNameLabel.TabIndex = 29;
+            this.revNameLabel.TabIndex = 5;
             this.revNameLabel.Text = "Rev Name";
             this.revNameLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // prefixLabel
             // 
-            this.prefixLabel.Location = new System.Drawing.Point(842, 710);
+            this.prefixLabel.Location = new System.Drawing.Point(951, 686);
             this.prefixLabel.Name = "prefixLabel";
             this.prefixLabel.Size = new System.Drawing.Size(74, 23);
-            this.prefixLabel.TabIndex = 33;
+            this.prefixLabel.TabIndex = 26;
             this.prefixLabel.Text = "Prefix";
             this.prefixLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // extLabel
             // 
-            this.extLabel.Location = new System.Drawing.Point(842, 736);
+            this.extLabel.Location = new System.Drawing.Point(951, 712);
             this.extLabel.Name = "extLabel";
             this.extLabel.Size = new System.Drawing.Size(74, 23);
-            this.extLabel.TabIndex = 35;
+            this.extLabel.TabIndex = 28;
             this.extLabel.Text = "Extension";
             this.extLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // intendedCheckBox
             // 
             this.intendedCheckBox.AutoSize = true;
-            this.intendedCheckBox.Location = new System.Drawing.Point(736, 183);
+            this.intendedCheckBox.Location = new System.Drawing.Point(845, 184);
             this.intendedCheckBox.Name = "intendedCheckBox";
             this.intendedCheckBox.Size = new System.Drawing.Size(220, 17);
             this.intendedCheckBox.TabIndex = 12;
@@ -478,7 +617,7 @@ namespace CaldsScriptGenerator
             // copyBenchCheckBox
             // 
             this.copyBenchCheckBox.AutoSize = true;
-            this.copyBenchCheckBox.Location = new System.Drawing.Point(718, 278);
+            this.copyBenchCheckBox.Location = new System.Drawing.Point(827, 279);
             this.copyBenchCheckBox.Name = "copyBenchCheckBox";
             this.copyBenchCheckBox.Size = new System.Drawing.Size(119, 17);
             this.copyBenchCheckBox.TabIndex = 17;
@@ -491,7 +630,7 @@ namespace CaldsScriptGenerator
                                     this.helpToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(992, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(1080, 24);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -513,6 +652,13 @@ namespace CaldsScriptGenerator
             this.usersGuideToolStripMenuItem1.Text = "User\'s Guide";
             this.usersGuideToolStripMenuItem1.Click += new System.EventHandler(this.UsersGuideToolStripMenuItemClick);
             // 
+            // calSupportToolsSiteToolStripMenuItem
+            // 
+            this.calSupportToolsSiteToolStripMenuItem.Name = "calSupportToolsSiteToolStripMenuItem";
+            this.calSupportToolsSiteToolStripMenuItem.Size = new System.Drawing.Size(190, 22);
+            this.calSupportToolsSiteToolStripMenuItem.Text = "Cal Support Tools Site";
+            this.calSupportToolsSiteToolStripMenuItem.Click += new System.EventHandler(this.CalSupportToolsSiteToolStripMenuItemClick);
+            // 
             // aboutToolStripMenuItem
             // 
             this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
@@ -524,10 +670,10 @@ namespace CaldsScriptGenerator
             // 
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
                                     this.toolStripStatusLabel1});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 792);
+            this.statusStrip1.Location = new System.Drawing.Point(0, 793);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(992, 22);
-            this.statusStrip1.TabIndex = 38;
+            this.statusStrip1.Size = new System.Drawing.Size(1080, 22);
+            this.statusStrip1.TabIndex = 31;
             this.statusStrip1.Text = "statusStrip1";
             // 
             // toolStripStatusLabel1
@@ -539,7 +685,7 @@ namespace CaldsScriptGenerator
             // waDefaultCheckBox
             // 
             this.waDefaultCheckBox.AutoSize = true;
-            this.waDefaultCheckBox.Location = new System.Drawing.Point(718, 36);
+            this.waDefaultCheckBox.Location = new System.Drawing.Point(827, 37);
             this.waDefaultCheckBox.Name = "waDefaultCheckBox";
             this.waDefaultCheckBox.Size = new System.Drawing.Size(114, 17);
             this.waDefaultCheckBox.TabIndex = 3;
@@ -548,14 +694,14 @@ namespace CaldsScriptGenerator
             // 
             // waDefSwPartTextBox
             // 
-            this.waDefSwPartTextBox.Location = new System.Drawing.Point(736, 59);
+            this.waDefSwPartTextBox.Location = new System.Drawing.Point(845, 60);
             this.waDefSwPartTextBox.Name = "waDefSwPartTextBox";
             this.waDefSwPartTextBox.Size = new System.Drawing.Size(100, 20);
             this.waDefSwPartTextBox.TabIndex = 4;
             // 
             // waDefSwPartLabel
             // 
-            this.waDefSwPartLabel.Location = new System.Drawing.Point(842, 58);
+            this.waDefSwPartLabel.Location = new System.Drawing.Point(951, 59);
             this.waDefSwPartLabel.Name = "waDefSwPartLabel";
             this.waDefSwPartLabel.Size = new System.Drawing.Size(52, 21);
             this.waDefSwPartLabel.TabIndex = 5;
@@ -564,14 +710,14 @@ namespace CaldsScriptGenerator
             // 
             // waDefLibTextBox
             // 
-            this.waDefLibTextBox.Location = new System.Drawing.Point(736, 85);
+            this.waDefLibTextBox.Location = new System.Drawing.Point(845, 86);
             this.waDefLibTextBox.Name = "waDefLibTextBox";
             this.waDefLibTextBox.Size = new System.Drawing.Size(100, 20);
             this.waDefLibTextBox.TabIndex = 6;
             // 
             // waDefLibLabel
             // 
-            this.waDefLibLabel.Location = new System.Drawing.Point(842, 84);
+            this.waDefLibLabel.Location = new System.Drawing.Point(951, 85);
             this.waDefLibLabel.Name = "waDefLibLabel";
             this.waDefLibLabel.Size = new System.Drawing.Size(52, 21);
             this.waDefLibLabel.TabIndex = 7;
@@ -581,7 +727,7 @@ namespace CaldsScriptGenerator
             // mkHandleCheckBox
             // 
             this.mkHandleCheckBox.AutoSize = true;
-            this.mkHandleCheckBox.Location = new System.Drawing.Point(718, 111);
+            this.mkHandleCheckBox.Location = new System.Drawing.Point(827, 112);
             this.mkHandleCheckBox.Name = "mkHandleCheckBox";
             this.mkHandleCheckBox.Size = new System.Drawing.Size(90, 17);
             this.mkHandleCheckBox.TabIndex = 8;
@@ -590,14 +736,14 @@ namespace CaldsScriptGenerator
             // 
             // mkHandleSwPartTextBox
             // 
-            this.mkHandleSwPartTextBox.Location = new System.Drawing.Point(736, 134);
+            this.mkHandleSwPartTextBox.Location = new System.Drawing.Point(845, 135);
             this.mkHandleSwPartTextBox.Name = "mkHandleSwPartTextBox";
             this.mkHandleSwPartTextBox.Size = new System.Drawing.Size(100, 20);
             this.mkHandleSwPartTextBox.TabIndex = 9;
             // 
             // mkHandleSwPartLabel
             // 
-            this.mkHandleSwPartLabel.Location = new System.Drawing.Point(842, 133);
+            this.mkHandleSwPartLabel.Location = new System.Drawing.Point(951, 134);
             this.mkHandleSwPartLabel.Name = "mkHandleSwPartLabel";
             this.mkHandleSwPartLabel.Size = new System.Drawing.Size(52, 21);
             this.mkHandleSwPartLabel.TabIndex = 10;
@@ -607,7 +753,7 @@ namespace CaldsScriptGenerator
             // transferCheckBox
             // 
             this.transferCheckBox.AutoSize = true;
-            this.transferCheckBox.Location = new System.Drawing.Point(718, 301);
+            this.transferCheckBox.Location = new System.Drawing.Point(827, 302);
             this.transferCheckBox.Name = "transferCheckBox";
             this.transferCheckBox.Size = new System.Drawing.Size(65, 17);
             this.transferCheckBox.TabIndex = 18;
@@ -617,7 +763,7 @@ namespace CaldsScriptGenerator
             // bldImageCheckBox
             // 
             this.bldImageCheckBox.AutoSize = true;
-            this.bldImageCheckBox.Location = new System.Drawing.Point(718, 324);
+            this.bldImageCheckBox.Location = new System.Drawing.Point(827, 325);
             this.bldImageCheckBox.Name = "bldImageCheckBox";
             this.bldImageCheckBox.Size = new System.Drawing.Size(81, 17);
             this.bldImageCheckBox.TabIndex = 19;
@@ -627,7 +773,7 @@ namespace CaldsScriptGenerator
             // uploadCheckBox
             // 
             this.uploadCheckBox.AutoSize = true;
-            this.uploadCheckBox.Location = new System.Drawing.Point(718, 347);
+            this.uploadCheckBox.Location = new System.Drawing.Point(827, 348);
             this.uploadCheckBox.Name = "uploadCheckBox";
             this.uploadCheckBox.Size = new System.Drawing.Size(60, 17);
             this.uploadCheckBox.TabIndex = 20;
@@ -644,11 +790,13 @@ namespace CaldsScriptGenerator
             // 
             // devRelRadioButton
             // 
+            this.devRelRadioButton.Checked = true;
             this.devRelRadioButton.Enabled = false;
             this.devRelRadioButton.Location = new System.Drawing.Point(6, 39);
             this.devRelRadioButton.Name = "devRelRadioButton";
             this.devRelRadioButton.Size = new System.Drawing.Size(130, 23);
-            this.devRelRadioButton.TabIndex = 23;
+            this.devRelRadioButton.TabIndex = 1;
+            this.devRelRadioButton.TabStop = true;
             this.devRelRadioButton.Text = "Development Release";
             this.devRelRadioButton.UseVisualStyleBackColor = true;
             // 
@@ -658,7 +806,7 @@ namespace CaldsScriptGenerator
             this.ppvRelRadioButton.Location = new System.Drawing.Point(6, 68);
             this.ppvRelRadioButton.Name = "ppvRelRadioButton";
             this.ppvRelRadioButton.Size = new System.Drawing.Size(104, 24);
-            this.ppvRelRadioButton.TabIndex = 24;
+            this.ppvRelRadioButton.TabIndex = 2;
             this.ppvRelRadioButton.Text = "PPV Release";
             this.ppvRelRadioButton.UseVisualStyleBackColor = true;
             // 
@@ -668,16 +816,16 @@ namespace CaldsScriptGenerator
             this.valRelRadioButton.Location = new System.Drawing.Point(6, 98);
             this.valRelRadioButton.Name = "valRelRadioButton";
             this.valRelRadioButton.Size = new System.Drawing.Size(115, 24);
-            this.valRelRadioButton.TabIndex = 25;
+            this.valRelRadioButton.TabIndex = 3;
             this.valRelRadioButton.Text = "Validation Release";
             this.valRelRadioButton.UseVisualStyleBackColor = true;
             // 
             // unixFormatCheckBox
             // 
-            this.unixFormatCheckBox.Location = new System.Drawing.Point(718, 765);
+            this.unixFormatCheckBox.Location = new System.Drawing.Point(827, 741);
             this.unixFormatCheckBox.Name = "unixFormatCheckBox";
             this.unixFormatCheckBox.Size = new System.Drawing.Size(104, 24);
-            this.unixFormatCheckBox.TabIndex = 36;
+            this.unixFormatCheckBox.TabIndex = 29;
             this.unixFormatCheckBox.Text = "Unix Format";
             this.unixFormatCheckBox.UseVisualStyleBackColor = true;
             // 
@@ -690,7 +838,7 @@ namespace CaldsScriptGenerator
             this.groupBox3.Location = new System.Drawing.Point(18, 56);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Size = new System.Drawing.Size(163, 126);
-            this.groupBox3.TabIndex = 39;
+            this.groupBox3.TabIndex = 1;
             this.groupBox3.TabStop = false;
             // 
             // revokeCheckBox
@@ -700,7 +848,7 @@ namespace CaldsScriptGenerator
             this.revokeCheckBox.Location = new System.Drawing.Point(6, 16);
             this.revokeCheckBox.Name = "revokeCheckBox";
             this.revokeCheckBox.Size = new System.Drawing.Size(64, 17);
-            this.revokeCheckBox.TabIndex = 44;
+            this.revokeCheckBox.TabIndex = 0;
             this.revokeCheckBox.Text = "Revoke";
             this.revokeCheckBox.UseVisualStyleBackColor = true;
             // 
@@ -710,7 +858,7 @@ namespace CaldsScriptGenerator
             this.checkinCopyRadioButton.Location = new System.Drawing.Point(6, 16);
             this.checkinCopyRadioButton.Name = "checkinCopyRadioButton";
             this.checkinCopyRadioButton.Size = new System.Drawing.Size(93, 24);
-            this.checkinCopyRadioButton.TabIndex = 40;
+            this.checkinCopyRadioButton.TabIndex = 0;
             this.checkinCopyRadioButton.TabStop = true;
             this.checkinCopyRadioButton.Text = "Checkin Copy";
             this.checkinCopyRadioButton.UseVisualStyleBackColor = true;
@@ -722,7 +870,7 @@ namespace CaldsScriptGenerator
             this.updateStatusRadioButton.Location = new System.Drawing.Point(105, 16);
             this.updateStatusRadioButton.Name = "updateStatusRadioButton";
             this.updateStatusRadioButton.Size = new System.Drawing.Size(93, 24);
-            this.updateStatusRadioButton.TabIndex = 41;
+            this.updateStatusRadioButton.TabIndex = 1;
             this.updateStatusRadioButton.TabStop = true;
             this.updateStatusRadioButton.Text = "Update Status";
             this.updateStatusRadioButton.UseVisualStyleBackColor = true;
@@ -735,87 +883,78 @@ namespace CaldsScriptGenerator
             this.groupBox2.Location = new System.Drawing.Point(6, 10);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(215, 46);
-            this.groupBox2.TabIndex = 42;
+            this.groupBox2.TabIndex = 0;
             this.groupBox2.TabStop = false;
-            // 
-            // productionIntentCheckBox
-            // 
-            this.productionIntentCheckBox.AutoSize = true;
-            this.productionIntentCheckBox.Enabled = false;
-            this.productionIntentCheckBox.Location = new System.Drawing.Point(18, 188);
-            this.productionIntentCheckBox.Name = "productionIntentCheckBox";
-            this.productionIntentCheckBox.Size = new System.Drawing.Size(107, 17);
-            this.productionIntentCheckBox.TabIndex = 43;
-            this.productionIntentCheckBox.Text = "Production Intent";
-            this.productionIntentCheckBox.UseVisualStyleBackColor = true;
             // 
             // groupBox1
             // 
             this.groupBox1.Controls.Add(this.groupBox2);
-            this.groupBox1.Controls.Add(this.productionIntentCheckBox);
             this.groupBox1.Controls.Add(this.groupBox3);
             this.groupBox1.Controls.Add(this.logMessageTextBox);
             this.groupBox1.Controls.Add(this.logMessageLlabel);
             this.groupBox1.Controls.Add(this.revNameTextBox);
             this.groupBox1.Controls.Add(this.revNameLabel);
-            this.groupBox1.Location = new System.Drawing.Point(718, 393);
+            this.groupBox1.Location = new System.Drawing.Point(827, 394);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(252, 267);
-            this.groupBox1.TabIndex = 44;
+            this.groupBox1.Size = new System.Drawing.Size(229, 242);
+            this.groupBox1.TabIndex = 22;
             this.groupBox1.TabStop = false;
             // 
-            // calSupportToolsSiteToolStripMenuItem
+            // contextMenuStrip1
             // 
-            this.calSupportToolsSiteToolStripMenuItem.Name = "calSupportToolsSiteToolStripMenuItem";
-            this.calSupportToolsSiteToolStripMenuItem.Size = new System.Drawing.Size(190, 22);
-            this.calSupportToolsSiteToolStripMenuItem.Text = "Cal Support Tools Site";
-            this.calSupportToolsSiteToolStripMenuItem.Click += new System.EventHandler(this.CalSupportToolsSiteToolStripMenuItemClick);
+            this.contextMenuStrip1.Name = "offsetContextMenuStrip";
+            this.contextMenuStrip1.Size = new System.Drawing.Size(153, 26);
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
-            this.ClientSize = new System.Drawing.Size(992, 814);
+            this.ClientSize = new System.Drawing.Size(1080, 815);
+            this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.groupBox1);
-            this.Controls.Add(this.unixFormatCheckBox);
+            this.Controls.Add(this.mkHandleCheckBox);
             this.Controls.Add(this.uploadCheckBox);
+            this.Controls.Add(this.unixFormatCheckBox);
             this.Controls.Add(this.bldImageCheckBox);
             this.Controls.Add(this.transferCheckBox);
             this.Controls.Add(this.mkHandleSwPartLabel);
             this.Controls.Add(this.mkHandleSwPartTextBox);
-            this.Controls.Add(this.mkHandleCheckBox);
             this.Controls.Add(this.waDefLibLabel);
             this.Controls.Add(this.waDefLibTextBox);
+            this.Controls.Add(this.extLabel);
             this.Controls.Add(this.waDefSwPartLabel);
             this.Controls.Add(this.waDefSwPartTextBox);
             this.Controls.Add(this.waDefaultCheckBox);
-            this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.copyBenchCheckBox);
+            this.Controls.Add(this.tableLayoutPanel3);
             this.Controls.Add(this.intendedCheckBox);
-            this.Controls.Add(this.extLabel);
+            this.Controls.Add(this.tableLayoutPanel1);
+            this.Controls.Add(this.swPartLabel);
             this.Controls.Add(this.prefixLabel);
             this.Controls.Add(this.extTextBox);
             this.Controls.Add(this.prefixTextBox);
             this.Controls.Add(this.calplotCheckBox);
             this.Controls.Add(this.createClass2CheckBox);
-            this.Controls.Add(this.swPartLabel);
             this.Controls.Add(this.chcalcopySwPartTextBox);
             this.Controls.Add(this.mkcopyCheckBox);
-            this.Controls.Add(this.tableLayoutPanel3);
+            this.Controls.Add(this.menuStrip1);
+            this.Controls.Add(this.chcalcopyCheckBox);
             this.Controls.Add(this.goButton);
-            this.Controls.Add(this.tableLayoutPanel1);
             this.Controls.Add(this.batchCaleditCheckBox);
             this.Controls.Add(this.activateCheckBox);
-            this.Controls.Add(this.chcalcopyCheckBox);
-            this.Controls.Add(this.menuStrip1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "MainForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Calds Process Script Generator";
+            this.Text = "Calds Script Generator";
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
+            this.offsetGroupBox.ResumeLayout(false);
+            this.valueGroupBox.ResumeLayout(false);
+            this.calGroupBox.ResumeLayout(false);
+            this.srcPartsGroupBox.ResumeLayout(false);
+            this.dstGroupBox.ResumeLayout(false);
             this.tableLayoutPanel3.ResumeLayout(false);
             this.tableLayoutPanel3.PerformLayout();
             this.menuStrip1.ResumeLayout(false);
@@ -830,10 +969,23 @@ namespace CaldsScriptGenerator
             this.ResumeLayout(false);
             this.PerformLayout();
         }
+        private System.Windows.Forms.Button clrDstButton;
+        private System.Windows.Forms.GroupBox dstGroupBox;
+        private System.Windows.Forms.Button srcClearButton;
+        private System.Windows.Forms.GroupBox srcPartsGroupBox;
+        private System.Windows.Forms.Button clearCalsButton;
+        private System.Windows.Forms.RadioButton normalRadioButton;
+        private System.Windows.Forms.RadioButton singleRadioButton;
+        private System.Windows.Forms.GroupBox calGroupBox;
+        private System.Windows.Forms.RadioButton hexRadioButton;
+        private System.Windows.Forms.RadioButton engRadioButton;
+        private System.Windows.Forms.GroupBox valueGroupBox;
+        private System.Windows.Forms.CheckBox autoFillCheckBox;
+        private System.Windows.Forms.GroupBox offsetGroupBox;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
         private System.Windows.Forms.ToolStripMenuItem calSupportToolsSiteToolStripMenuItem;
         private System.Windows.Forms.CheckBox revokeCheckBox;
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.CheckBox productionIntentCheckBox;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.RadioButton updateStatusRadioButton;
         private System.Windows.Forms.RadioButton checkinCopyRadioButton;
@@ -842,8 +994,6 @@ namespace CaldsScriptGenerator
         private System.Windows.Forms.RadioButton valRelRadioButton;
         private System.Windows.Forms.RadioButton ppvRelRadioButton;
         private System.Windows.Forms.RadioButton devRelRadioButton;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox calOffsetTextBox;
         private System.Windows.Forms.TextBox calValTextBox;
         private System.Windows.Forms.TextBox calNameTextBox;
